@@ -4,12 +4,12 @@
   ysp.runtime.Model.extendLoadingModel({
     getData_control182_k2owAo: function (elem) {
       if (elem) {
-        var load = elem.ownerDocument.defaultView.localStorage.getItem('layerLoading');if (load == null) {
-          setTimeout(function () {
-            ysp.appMain.hideLoading();
-          }, 5000);
-        } else {
-          ysp.appMain.showLoading();
+        var load = elem.ownerDocument.defaultView.localStorage.getItem('layerLoading');if (ysp.customHelper.customInfomation) {
+          if (load == null) {
+            ysp.appMain.hideLoading();ysp.customHelper.customInfomation = false;
+          } else {
+            ysp.appMain.showLoading();
+          }
         }return load;
       }
     },

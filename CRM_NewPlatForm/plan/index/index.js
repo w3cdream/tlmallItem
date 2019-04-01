@@ -31,7 +31,9 @@
         }
       }if (data.eventType == 'click') {
         //IOS端获取当前网速方法
-        top.EAPI.postMessageToNative('IOSLine', '');var src = data.dataCustom.url;var title = data.dataCustom.title;if (title == '拜访总览') {
+        top.EAPI.postMessageToNative('IOSLine', '');var src = data.dataCustom.url;var title = data.dataCustom.title;if (title == '信息录入') {
+          ysp.customHelper.customInfoFill = true;
+        }if (title == '拜访总览') {
           openUrl(src, title);
         } else {
           elem.ownerDocument.defaultView.open(src);

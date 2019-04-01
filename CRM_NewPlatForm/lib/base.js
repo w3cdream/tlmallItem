@@ -141,6 +141,8 @@
       return ;
     }
     if(user&&password){
+      STARTTIME = Date.now();
+      LOGINTIME = new Date().getTime();
       var currentAwin = ysp.runtime.Browser.activeBrowser.contentWindow;
       var EnCoderXhr = new XMLHttpRequest();
       EnCoderXhr.onreadystatechange = function(){
@@ -180,6 +182,7 @@
                 }
               }
               getAllMenu(currentAwin,MenuList);
+              ysp.customHelper.CONSOLELOG('VCRM','登录日志','登录成功',STARTTIME,LOGINTIME);
             }else if(EnCoderXhr.status>=400 && EnCoderXhr.readyState == 4){
               loginTimeOut('登录失败,接口返回错误,是否刷新重试');
             }
@@ -1299,7 +1302,29 @@
     
   }
   utils.extend(ysp.customHelper, {
-    addMarkedModule:addMarkedModule,
+    CONSOLELOG:function(source,type,failed,startTime,loginTime){
+      	var loginUsed = (Date.now() - startTime)/1000; //运行时间
+        var DATA = {'log':{
+                  'source':source,
+                  'type':type,
+                  'loginName':ysp.customHelper.logLoginName,
+                  'email':'',
+                  'model':'',
+                  'loginTime':loginTime,
+                  'occurTime':new Date().getTime(),
+                  'timeUsed':loginUsed,
+                  'failedReason':failed,
+                  'uploadFailedReason':''
+                 }
+               }
+        if(top.EAPI.isIOS()){
+          top.EAPI.postMessageToNative('YSPLOG',JSON.stringify(DATA));
+        }else{
+          top.yspCheckIn.sendLog(JSON.stringify(DATA));
+        }
+    },
+    logLoginName:LOGINNAME,
+    addMarkedModule:addMarkedModule,
     AndroidBidFlag:'',
     AndroidBackFn:topWin.AndroidBack,
     AndroidDocument:'',//安卓物理返回键客户门店返回元素
@@ -1325,7 +1350,8 @@
     refreshWinAfterWinName: _refreshWinAfterWinName,
     getTableClassData: _getTableClassData,
     backTopHead:_backTopHead,
-    getRTWin: function getRTWin() {
+    customInfomation:false, //信息录入loading状态
+    getRTWin: function getRTWin() {
       var aWin = ysp.runtime.Browser.activeBrowser.contentWindow;
       if (aWin) {
         return aWin.frameElement.ownerDocument.defaultView;
@@ -2428,6 +2454,7 @@
     },
     // 目标页面加载前执行, aWin为当前页面的window对象, doc为当前页面的document对象
     beforeTargetLoad: function beforeTargetLoad(aWin, doc) {
+      //记录日志  区分功能点录入
     	if(aWin){
         if(aWin.localStorage && aWin.localStorage.getItem('layerLoading') == null ){
           ysp.appMain.hideLoading();
@@ -2495,6 +2522,8 @@
       });
       aWin.addEventListener('DOMContentLoaded', function () {
         window.onerror = function(msg,url,line){
+          var modelName = '';
+          modelName = ysp.runtime.Model.getActiveModel() && ysp.runtime.Model.getActiveModel().chineseName;
           var DATA = {'log':{
                         'source':'VCRM',
                         'type':'错误日志',
@@ -2505,10 +2534,15 @@
                         'occurTime':new Date().getTime(),
                         'timeUsed':LOGINUSED,
                         'failedReason':'Error:'+msg+' | Url:'+url+' | Line:'+line,
-                        'uploadFailedReason':''
+                        'uploadFailedReason':modelName
           						 }
                      }
-					top.yspCheckIn.sendLog(JSON.stringify(DATA))
+          if(top.EAPI.isIOS()){
+            top.EAPI.postMessageToNative('YSPLOG',JSON.stringify(DATA));
+          }else{
+            top.yspCheckIn.sendLog(JSON.stringify(DATA));
+          }
+					
         }
         if (aWin.location.href.indexOf('index.html') !== -1) {
           var actionEvent = '{"target":"null","data":"closePreLoading"}';
