@@ -478,7 +478,7 @@ div[data-ysp-modelid="menu"] div[data-ysp="component"] {
   border-bottom: 1px solid #ddd;
 }
 .ysp_filter .ysp_selectBox .selectBox_content .contentScroll {
-  height: 80%;
+  height: 40%;
   overflow-y: scroll;
 }
 .ysp_filter .ysp_selectBox .selectBox_content .timeContent {
