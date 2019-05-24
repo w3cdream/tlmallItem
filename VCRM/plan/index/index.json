@@ -1,7 +1,7 @@
 {
   "version": "0.1",
   "id": "index",
-  "targetURL": "http://192.168.220.82:8080/pttlCrm/res/index.html",
+  "targetURL": "http://pttlcrm.com/pttlCrm/res/index.html",
   "jsFile": "index.js",
   "requires": {
     "customerWorkspace": "../customerWorkspace/index.json",
@@ -9,7 +9,8 @@
     "businesHeadquartersDC": "../businesHeadquartersDC/index.json",
     "visitIndex": "../visitIndex/index.json",
     "stockInquire": "../stockInquire/index.json",
-    "customerInformationFIll": "../customerInformationFIll/index.json"
+    "customerInformationFIll": "../customerInformationFIll/index.json",
+    "TestModel": "../TestModel/index.json"
   },
   "chineseName": "首页",
   "description": "首页",
@@ -80,6 +81,11 @@
       ],
       "anchors": [],
       "urlAnchor": []
+    },
+    "context9_nVg8p1": {
+      "controls": [],
+      "anchors": [],
+      "urlAnchor": []
     }
   },
   "flows": {
@@ -114,6 +120,10 @@
         {
           "toContextId": "context51_PhTFP3",
           "toModelId": "customerInformationFIll"
+        },
+        {
+          "toContextId": "context92_TDKuvB",
+          "toModelId": "TestModel"
         }
       ]
     },
@@ -163,6 +173,10 @@
           }
         }
       ]
+    },
+    "page9_REpIzJ": {
+      "contextId": "context9_nVg8p1",
+      "layout": []
     }
   },
   "matchers": {
@@ -176,7 +190,7 @@
     "page/urls": {
       "contexts": {
         "context1_ZpWnXN": [
-          "192.168.220.82:8080/pttlCrm/res/index.html"
+          "pttlcrm.com/pttlCrm/res/index.html"
         ]
       }
     },
@@ -365,6 +379,24 @@
             "timeShow",
             "useIframeLoginPtBigDashboard",
             "useIframeLoginPtDatsShow"
+          ],
+          [
+            "ImIframe",
+            "InfoIframe",
+            "brandHeader",
+            "contentContainer",
+            "currentUserName",
+            "docs-pictures",
+            "headBackImage",
+            "ibars-iforms-box",
+            "iframeTextName",
+            "logout",
+            "menu",
+            "mod-sideBar",
+            "noticeNum_",
+            "notice_informs",
+            "sidebarGroove",
+            "timeShow"
           ]
         ]
       }
@@ -670,6 +702,48 @@
             "title",
             "u-help",
             "u-time"
+          ],
+          [
+            "activ",
+            "backImage",
+            "box",
+            "clearfix",
+            "client-portrait",
+            "close",
+            "content-container",
+            "content-main-region",
+            "disabled",
+            "docs-pictures",
+            "gob",
+            "halving-line",
+            "head_search",
+            "hide",
+            "ibar-adsList",
+            "ibar-code",
+            "ibar-code-content",
+            "ibar-informs-ul",
+            "ibar-msg",
+            "ibars-iforms-box",
+            "ibars-tab",
+            "icon",
+            "icon-arrow",
+            "icon-msg",
+            "icons",
+            "img",
+            "logo",
+            "m-head",
+            "m-settings",
+            "main-container",
+            "mask",
+            "mod-sideBar",
+            "shrink",
+            "sidebar-container",
+            "sidebar-container-footer",
+            "sidebar-container-footer-wrapper",
+            "sidebar-groove",
+            "title",
+            "u-help",
+            "u-time"
           ]
         ]
       }
@@ -755,6 +829,37 @@
             "UL/LI/DIV",
             "UL/LI/I",
             "UL/LI/UL"
+          ],
+          [
+            "-/-/DIV",
+            "-/-/SCRIPT",
+            "-/DIV/DIV",
+            "-/DIV/UL",
+            "DIV/A/DIV",
+            "DIV/A/I",
+            "DIV/A/SPAN",
+            "DIV/DIV/A",
+            "DIV/DIV/DIV",
+            "DIV/DIV/FOOTER",
+            "DIV/DIV/H3",
+            "DIV/DIV/IFRAME",
+            "DIV/DIV/IMG",
+            "DIV/DIV/NAV",
+            "DIV/DIV/P",
+            "DIV/DIV/SPAN",
+            "DIV/DIV/UL",
+            "DIV/FOOTER/DIV",
+            "DIV/H3/I",
+            "DIV/NAV/UL",
+            "DIV/SPAN/A",
+            "DIV/UL/LI",
+            "FOOTER/DIV/DIV",
+            "LI/A/I",
+            "LI/A/SPAN",
+            "LI/DIV/DIV",
+            "LI/DIV/I",
+            "UL/LI/A",
+            "UL/LI/DIV"
           ]
         ]
       }

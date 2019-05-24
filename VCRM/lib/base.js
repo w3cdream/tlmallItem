@@ -122,11 +122,24 @@
   topWin.isReload = function(){
     top.yspCheckIn.isRefresh(true);
   }
+   var getposition = function(){
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState == 4) {
+        var obj = JSON.parse(xhr.response);
+         ysp.customHelper.branchName = obj.branch;
+        ysp.customHelper.position = obj.position;
+      }
+    };
+
+    xhr.open('POST', 'http://pttlcrm.com/pttlCrm/homepage/getUserIdAndEncoder', false);
+    xhr.send();
+  }
   //IOS端 登录方式 避开常规登录 用单独接口请求判断状态进行跳转登录(不走密码管家) 登录成功后调取菜单;  ( + 安卓端) 
   var loginTimeOut = function(str){
     var flag = confirm(str);
       if(flag){
-        ysp.runtime.Browser.activeBrowser.contentWindow.reload();
+        ysp.runtime.Browser.activeBrowser.contentWindow.location.reload();
       }
   }
   //强制匹配方案
@@ -148,21 +161,18 @@
       });
     }
   }
-  topWin.IOSLoginIn = function(user,password){
+  //安卓端 . 登录方式 弃用密码代填. 暂时为独立方法,看安卓是否符合整合登录前提 , 待安卓与IOS客户端同步后整合登录方法.
+  topWin.AndroidLoginIn = function(user,password){
     if(user == '' || password == ''){
       alert('用户名或密码为空,登录失败!');
       return ;
     }
     if(user&&password){
-      ysp.customHelper.logLoginName = user;//日志内容部分
-      STARTTIME = Date.now();
-      LOGINTIME = new Date().getTime();
-      var currentAwin = ysp.runtime.Browser.activeBrowser.contentWindow;
+      var currentAwin = ysp.runtime.Browser.activeBrowser.contentWindow;
       var EnCoderXhr = new XMLHttpRequest();
       EnCoderXhr.onreadystatechange = function(){
-        if(EnCoderXhr.readyState == 4){
+        if(EnCoderXhr.readyState == 4 && EnCoderXhr.status >=200 && EnCoderXhr.status <300 || EnCoderXhr.status == 304){
           var param = JSON.parse(EnCoderXhr.response);
-          loginEncoder = param.encoder; //日志信息
           setMaxDigits(130);
           var encrypPublicKey = new RSAKeyPair(param.publicExponent,'',param.modulus);
           var pwd = encryptedString(encrypPublicKey,encodeURIComponent(password));
@@ -180,84 +190,7 @@
               loginFlag = true;
               if (currentAwin.frameElement && currentAwin.frameElement.name == "browserFrame2" && currentAwin.frameElement.dataset.browser) {
                 if (currentAwin.location.href.indexOf('login') !== -1) {
-                  currentAwin.frameElement.src = 'http://192.168.220.82:8080/pttlCrm/res/index.html';
-                  //有可能出现登录框 . 如果不稳定 . 使用下面ysp.runtime.Model.setForceMatchModels(['index']);
-                  //RedCoreRedMi('index');
-                  ysp.runtime.Model.setForceMatchModels(['index']);
-                }
-                if(currentAwin.frameElement.src.indexOf('login')!==-1){
-                  if(ysp.runtime.Model.getActiveModel().id == 'login'){
-                    //有可能出现登录框 . 如果不稳定 . 使用下面ysp.runtime.Model.setForceMatchModels(['index']);
-                    //RedCoreRedMi('index');
-                    ysp.runtime.Model.setForceMatchModels(['index']);
-                    alert('登录成功! . 页面未跳转'+ysp.runtime.Model.forceMatchFlag+ysp.runtime.Model.getActiveModel().id);
-                  }else{
-                    alert('模板跳转!但pc地址未更换'+ysp.runtime.Model.forceMatchFlag+currentAwin.frameElement.src);
-                  }
-                }
-              }
-              getAllMenu(currentAwin,MenuList);
-              ysp.customHelper.CONSOLELOG('VCRM','登录日志','登录成功',STARTTIME,LOGINTIME,loginEncoder);
-            }else if(EnCoderXhr.status>=400 && EnCoderXhr.readyState == 4){
-              loginTimeOut('登录失败,接口返回错误,是否刷新重试');
-            }
-            //else if(xhr.status >=400 ){
-            // alert('登录效验失败.请手动登录!'+LoginXhr.status);
-            // }
-          }
-          LoginXhr.timeout = 10000;
-          LoginXhr.ontimeout = function(str){
-            loginTimeOut('登录接口请求超时,是否刷新重试');
-          }
-          LoginXhr.open('POST','http://192.168.220.82:8080/pttlCrm/login/loginInForMobile');
-          LoginXhr.send(body);
-        }else if(EnCoderXhr.status>=400 && EnCoderXhr.readyState == 4){
-          loginTimeOut('未获取到Encoder,是否刷新重试');
-        }
-      }
-      EnCoderXhr.timeout = 10000;
-      EnCoderXhr.ontimeout = function(){
-        loginTimeOut('Encoder获取,是否刷新重试');
-      }
-      EnCoderXhr.open('POST','http://192.168.220.82:8080/pttlCrm/login/getEncoderForMobile?'+user);
-      EnCoderXhr.send();
-    }
-	}
-  //安卓端 . 登录方式 弃用密码代填. 暂时为独立方法,看安卓是否符合整合登录前提 , 待安卓与IOS客户端同步后整合登录方法.
-  topWin.AndroidLoginIn = function(user,password){
-    STARTTIME = Date.now();
-    if(user == '' || password == ''){
-      alert('用户名或密码为空,登录失败!');
-      return ;
-    }
-    if(user&&password){
-      ysp.customHelper.logLoginName = user;
-      LOGINNAME = user;  //日志内容部分
-      LOGINTIME = new Date().getTime();
-      var currentAwin = ysp.runtime.Browser.activeBrowser.contentWindow;
-      var EnCoderXhr = new XMLHttpRequest();
-      EnCoderXhr.onreadystatechange = function(){
-        if(EnCoderXhr.readyState == 4 && EnCoderXhr.status >=200 && EnCoderXhr.status <300 || EnCoderXhr.status == 304){
-          var param = JSON.parse(EnCoderXhr.response);
-          setMaxDigits(130);
-          loginEncoder = param.encoder; //日志信息
-          var encrypPublicKey = new RSAKeyPair(param.publicExponent,'',param.modulus);
-          var pwd = encryptedString(encrypPublicKey,encodeURIComponent(password));
-          var body = {'loginName':user,'password':pwd,'encoder':param.encoder};
-          body = JSON.stringify(body);
-          var LoginXhr = new XMLHttpRequest();
-          LoginXhr.onreadystatechange = function(){
-            //每次响应状态都起一个Loading . -- 防止白屏无loading 运行时关闭loading 请求时间过长等问题 .
-            ysp.appMain.showLoading();
-            if(LoginXhr.status == 200 && LoginXhr.readyState == 4){
-              var MenuList = JSON.parse(LoginXhr.response).listMenu;
-              ALLMENU = MenuList;
-              var localMenuList = JSON.stringify(MenuList);
-              localStorage.setItem('listMenuForMobile',localMenuList);
-              loginFlag = true;
-              if (currentAwin.frameElement && currentAwin.frameElement.name == "browserFrame2" && currentAwin.frameElement.dataset.browser) {
-                if (currentAwin.location.href.indexOf('login') !== -1) {
-                  currentAwin.frameElement.src = 'http://192.168.220.82:8080/pttlCrm/res/index.html';
+                  currentAwin.frameElement.src = 'http://pttlcrm.com/pttlCrm/res/index.html';
                   //有可能出现登录框 . 如果不稳定 . 使用下面ysp.runtime.Model.setForceMatchModels(['index']);
                   //RedCoreRedMi('index');
                   ysp.runtime.Model.setForceMatchModels(['index']);
@@ -267,50 +200,34 @@
                     //有可能出现登录框 . 如果不稳定 . 使用下面ysp.runtime.Model.setForceMatchModels(['index']);
                     ysp.runtime.Model.setForceMatchModels(['index']);
                     //RedCoreRedMi('index');
-                    alert('登录成功! . 页面未跳转'+ysp.runtime.Model.forceMatchFlag+ysp.runtime.Model.getActiveModel().id);
+                    //alert('登录成功! . 页面未跳转'+ysp.runtime.Model.forceMatchFlag+ysp.runtime.Model.getActiveModel().id);
                   }else{
-                    alert('模板跳转!但pc地址未更换'+ysp.runtime.Model.forceMatchFlag+currentAwin.frameElement.src);
+                    //alert('模板跳转!但pc地址未更换'+ysp.runtime.Model.forceMatchFlag+currentAwin.frameElement.src);
                   }
                 }
               }
               getAllMenu(currentAwin,MenuList);
-              LOGINUSED = (Date.now() - STARTTIME)/1000; //运行时间
-              var DATA = {'log':{
-                        'source':'VCRM',
-                        'type':'登录日志',
-                        'loginName':LOGINNAME,
-                        'email':'',
-                        'model':'',
-            						'loginTime':LOGINTIME,
-                        'occurTime':new Date().getTime(),
-                        'timeUsed':LOGINUSED,
-                        'failedReason':'登录成功',
-                        'uploadFailedReason':loginEncoder
-          						 }
-                     }
-              top.yspCheckIn.sendLog(JSON.stringify(DATA));
             }else if(EnCoderXhr.status>=400 && EnCoderXhr.readyState == 4){
-              loginTimeOut('登录失败,接口返回错误,是否刷新重试');
+              //loginTimeOut('登录失败,接口返回错误,是否刷新重试');
             }
           }
           LoginXhr.timeout = 10000;
           LoginXhr.ontimeout = function(str){
-            loginTimeOut('登录接口请求超时,是否刷新重试');
+            //loginTimeOut('登录接口请求超时,是否刷新重试');
           }
-          LoginXhr.open('POST','http://192.168.220.82:8080/pttlCrm/login/loginInForMobile');
+          LoginXhr.open('POST','http://pttlcrm.com/pttlCrm/login/loginInForMobile');
           LoginXhr.send(body);
         }else if(EnCoderXhr.status>=400 && EnCoderXhr.readyState == 4){
-          loginTimeOut('未获取到Encoder,是否刷新重试');
+          //loginTimeOut('未获取到Encoder,是否刷新重试');
         }
       }
       EnCoderXhr.timeout = 10000;
       EnCoderXhr.ontimeout = function(){
-        loginTimeOut('Encoder获取,是否刷新重试');
+        //loginTimeOut('Encoder获取,是否刷新重试');
       }
-      EnCoderXhr.open('POST','http://192.168.220.82:8080/pttlCrm/login/getEncoderForMobile?'+user);
+      EnCoderXhr.open('POST','http://pttlcrm.com/pttlCrm/login/getEncoderForMobile?'+user);
       EnCoderXhr.send();
     }
-    
 	}
   //安卓物理返回键 - 客户端调用
   topWin.AndroidBack = function(){
@@ -536,7 +453,7 @@
         }
       }
     }
-    xhr.open('POST','http://192.168.220.82:8080/pttlCrm/crm/workSummary/getWorkBenchSummaryCount');
+    xhr.open('POST','http://pttlcrm.com/pttlCrm/crm/workSummary/getWorkBenchSummaryCount');
     xhr.send()
   }
   // 请求首页面所有一级\二级\三级菜\\\\\                                                                                                              单
@@ -569,7 +486,7 @@
           //       if(encoder && userId){
           //         var encoderXHR = new XMLHttpRequest();
           //         //4G网络下无法通过请求  , 暂时通过GET请求解决 . 
-          //       encoderXHR.open('GET','http://192.168.220.82:8080/ptDataShow/login/crmLogin?filter_userId='+userId+'&encoder='+encoder,false);
+          //       encoderXHR.open('GET','http://pttlcrm.com/ptDataShow/login/crmLogin?filter_userId='+userId+'&encoder='+encoder,false);
           //         //encoderXHR.send({'filter_userId':'ZHAOWEI','encoder':'WkhBT1dFSSswOC8wNy8yMDE4IDIwOjE0OjUy'});
           //         encoderXHR.send();
           //       }else{
@@ -577,7 +494,7 @@
           //       }
           //     }
           //   }
-          //    SessionXhr.open('GET','http://192.168.220.82:8080/pttlCrm/homepage/getUserIdAndEncoder',false);
+          //    SessionXhr.open('GET','http://pttlcrm.com/pttlCrm/homepage/getUserIdAndEncoder',false);
           //    SessionXhr.send();
           // }
       }
@@ -609,14 +526,14 @@
         //       if(encoder && userId){
         //         var encoderXHR = new XMLHttpRequest();
         //         //4G网络下无法通过请求  , 暂时通过GET请求解决 . 
-        //       encoderXHR.open('GET','http://192.168.220.82:8080/ptDataShow/login/crmLogin?filter_userId='+userId+'&encoder='+encoder,false);
+        //       encoderXHR.open('GET','http://pttlcrm.com/ptDataShow/login/crmLogin?filter_userId='+userId+'&encoder='+encoder,false);
         //         encoderXHR.send();
         //       }else{
         //         console.error('AndEncoder接口请求失败!')
         //       }
         //     }
         //   }
-        //    SessionXhr.open('GET','http://192.168.220.82:8080/pttlCrm/homepage/getUserIdAndEncoder',false);
+        //    SessionXhr.open('GET','http://pttlcrm.com/pttlCrm/homepage/getUserIdAndEncoder',false);
         //    SessionXhr.send();
         // }
     }
@@ -656,7 +573,7 @@
 //                   if(encoder && userId){
 //                     var encoderXHR = new XMLHttpRequest();
 //                     //4G网络下无法通过请求  , 暂时通过GET请求解决 . 
-//                   encoderXHR.open('GET','http://192.168.220.82:8080/ptDataShow/login/crmLogin?filter_userId='+userId+'&encoder='+encoder,false);
+//                   encoderXHR.open('GET','http://pttlcrm.com/ptDataShow/login/crmLogin?filter_userId='+userId+'&encoder='+encoder,false);
 //                     //encoderXHR.send({'filter_userId':'ZHAOWEI','encoder':'WkhBT1dFSSswOC8wNy8yMDE4IDIwOjE0OjUy'});
 //                     encoderXHR.send();
 //                   }else{
@@ -664,7 +581,7 @@
 //                   }
 //                 }
 //               }
-//                SessionXhr.open('GET','http://192.168.220.82:8080/pttlCrm/homepage/getUserIdAndEncoder',false);
+//                SessionXhr.open('GET','http://pttlcrm.com/pttlCrm/homepage/getUserIdAndEncoder',false);
 //                SessionXhr.send();
 //             }
 //           }
@@ -681,7 +598,7 @@
 //           }
 //         }
 //       };
-//       xhr.open('POST', 'http://192.168.220.82:8080/pttlCrm/sys/auth/rela/getSystemLeftMenuListForMobile',false);
+//       xhr.open('POST', 'http://pttlcrm.com/pttlCrm/sys/auth/rela/getSystemLeftMenuListForMobile',false);
 //       xhr.send();
 //     }else{
 //       console.error('对象只有一个,当前代码并没有兼容别的对象!!!!');
@@ -836,7 +753,7 @@
         return;
       }
       var xhr = new topWin.XMLHttpRequest();
-      xhr.open('POST', 'http://192.168.220.82:8080/pttlCrm/sys/auth/rela/getSystemLeftMenuList', true);
+      xhr.open('POST', 'http://pttlcrm.com/pttlCrm/sys/auth/rela/getSystemLeftMenuList', true);
       xhr.error = function (e) {
         console.error(e);
       };
@@ -900,7 +817,7 @@
 
   function _getThirdMenuList(parentId, callback) {
     var xhr = new topWin.XMLHttpRequest();
-    xhr.open('POST', 'http://192.168.220.82:8080/pttlCrm/sys/auth/menu/getThirdMenuList', true);
+    xhr.open('POST', 'http://pttlcrm.com/pttlCrm/sys/auth/menu/getThirdMenuList', true);
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
     xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
     xhr.onreadystatechange = function () {
@@ -1303,7 +1220,7 @@
     if(url && !model){
       currentWin.location.href = url
     }else if(!url && !model){
-      currentWin.location.href = 'http://192.168.220.82:8080/pttlCrm/res/page/visitManager/customerWorkspace/customerWorkspace.html';
+      currentWin.location.href = 'http://pttlcrm.com/pttlCrm/res/page/visitManager/customerWorkspace/customerWorkspace.html';
     }
     if(url=='' && model){
       ysp.runtime.Model.setForceMatchModels([model]);
@@ -1319,6 +1236,8 @@
   }
   utils.extend(ysp.customHelper, {
     //信息录入本地缓存部分
+    position:'',
+    branchName:'',
     informationEntry:{
       enterName:'', //录入客户名称
       basic:{
@@ -2655,12 +2574,12 @@
     // 当目标页面加载完onload时执行, aWin为当前页面的window对象, doc为当前页面的document对象
     onTargetLoad: function onTargetLoad(aWin, doc) {
       if (aWin) {
-        if (aWin.location.href == 'http://192.168.220.82:8080/pttlCrm/res/index.html') {
+        if (aWin.location.href == 'http://pttlcrm.com/pttlCrm/res/index.html') {
           //在登录成功时,请求PC端菜单接口,获取全部菜单列表  -- 新平台做临时调试使用 .
           getAllMenu(aWin);
           // var _this = this;
           // var xhr = new aWin.XMLHttpRequest();
-          // xhr.open('GET', 'http://192.168.220.82:8080/pttlCrm/login/addMobileLoginLog', true);
+          // xhr.open('GET', 'http://pttlcrm.com/pttlCrm/login/addMobileLoginLog', true);
           // xhr.send();
         }
       }
@@ -2680,7 +2599,7 @@
     	}
       //调试IOS登录框问题 - 地址变成特殊地址 
       if(aWin.location.href.indexOf('ysp_mobile')!==-1 && top.EAPI.isIOS()){
-        aWin.location.href = 'http://192.168.220.82:8080/pttlCrm/login';
+        aWin.location.href = 'http://pttlcrm.com/pttlCrm/login';
         top.EAPI.postMessageToNative('IOSLoginIn', '');
         ysp.appMain.showLoading();
       }
@@ -2694,7 +2613,7 @@
       if(aWin.location.href.indexOf('login') !==-1 && top.EAPI.isAndroid()){
         top.yspCheckIn.crmLogin();
       }
-      if (aWin.location.href == 'http://192.168.220.82:8080/pttlCrm/res/index.html') {
+      if (aWin.location.href == 'http://pttlcrm.com/pttlCrm/res/index.html') {
           //在登录成功时,请求菜单接口,获取全部菜单列表
           getAllMenu(aWin);
       }
@@ -2715,7 +2634,7 @@
       // }
       //2.7.0及以上 运行时 当主iframe.name=='browserFrame2'  使页面匹配login
       // if(aWin.location.href.indexOf('ysp_mobile') !== -1){
-      //   aWin.location.href = 'http://192.168.220.82:8080/pttlCrm/login?clientType=ysp'
+      //   aWin.location.href = 'http://pttlcrm.com/pttlCrm/login?clientType=ysp'
       // }
       if (aWin.frameElement && aWin.frameElement.name == "browserFrame2" && aWin.frameElement.dataset.browser) {
         topWin = aWin;
