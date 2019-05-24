@@ -40,14 +40,13 @@
 /******/ 	return __webpack_require__(0);
 /******/ })
 /************************************************************************/
-/******/ ({
-
-/***/ 0:
+/******/ ([
+/* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var _header = __webpack_require__(74);
+	var _header = __webpack_require__(62);
 
 	var header = _interopRequireWildcard(_header);
 
@@ -59,15 +58,15 @@
 
 	var iframeUtils = _interopRequireWildcard(_iframeUtils);
 
-	var _report = __webpack_require__(75);
+	var _report = __webpack_require__(63);
 
 	var report = _interopRequireWildcard(_report);
 
-	var _sign = __webpack_require__(80);
+	var _sign = __webpack_require__(68);
 
 	var sign = _interopRequireWildcard(_sign);
 
-	var _signOut = __webpack_require__(81);
+	var _signOut = __webpack_require__(69);
 
 	var signOut = _interopRequireWildcard(_signOut);
 
@@ -92,7 +91,7 @@
 	            var clickType = data.clickType;
 	            $(this).parent().addClass("z-act");
 	            $(this).parent().siblings().removeClass("z-act");
-	            if (clickType != null && typeof clickType != "undefined") {
+	            if (clickType != null && typeof clickType != "undefined" && clickType.length == 3) {
 	                switch (title) {
 	                    case '签到':
 	                        sign.load(data);
@@ -129,8 +128,7 @@
 	});
 
 /***/ }),
-
-/***/ 1:
+/* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -255,7 +253,6 @@
 	        commonUtils.getTopWin().document.documentElement.classList.add('loading');
 	    }
 	    dataUtils.setTopWindowData("loading", "loading");
-	    localStorage.setItem("layerLoading", "1"); //放入session
 	};
 	/**
 	 * 加载数据层关闭
@@ -268,7 +265,6 @@
 	        commonUtils.getTopWin().document.documentElement.classList.remove('loading');
 	    }
 	    dataUtils.clearTopWindowData("loading");
-	    localStorage.removeItem("layerLoading"); //删除名称为“layerLoading”的信息。
 	};
 
 	/**
@@ -303,8 +299,7 @@
 	};
 
 /***/ }),
-
-/***/ 2:
+/* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -359,8 +354,7 @@
 	};
 
 /***/ }),
-
-/***/ 3:
+/* 3 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -379,10 +373,6 @@
 	var MENU_NAVIGATOR = exports.MENU_NAVIGATOR = '#menuNavigator'; //头部导航菜单
 	var USERNAMEANDENCODER = exports.USERNAMEANDENCODER = 'USERNAMEANDENCODER';
 
-	var SYSTEM_MENU = exports.SYSTEM_MENU = "";
-	var SYSTEM_MOBILE_MENU = exports.SYSTEM_MOBILE_MENU = "";
-	var CURRENT_USER = exports.CURRENT_USER = "";
-
 	//本地
 	//export const SERVER_ROOT = 'http://192.168.1.223:8080'; //服务端根路径
 	//export const LOCAL_SERVER_ROOT = 'http://localhost:3000'; //本地服务端根路径
@@ -394,15 +384,14 @@
 	//export const PTDATASHOW_SERVER_ROOT = 'http://192.168.1.224:8080/ptDataShow';
 
 	//生产 nginx
-	//export const SERVER_ROOT = 'http://192.168.1.227'; //服务端根路径
-	//export const LOCAL_SERVER_ROOT = 'http://192.168.1.227'; //本地服务端根路径
+	//export const SERVER_ROOT = 'http://192.168.220.82:8080'; //服务端根路径
+	//export const LOCAL_SERVER_ROOT = 'http://192.168.220.82:8080'; //本地服务端根路径
 	//export const PTDATASHOW_SERVER_ROOT = 'http://192.168.1.202/ptDataShow';
 
 	//生产 228
 	var SERVER_ROOT = exports.SERVER_ROOT = ''; //服务端根路径
 	var LOCAL_SERVER_ROOT = exports.LOCAL_SERVER_ROOT = ''; //本地服务端根路径
-	var PTDATASHOW_SERVER_ROOT = exports.PTDATASHOW_SERVER_ROOT = 'http://pttlcrm.com/ptDataShow'; //'https://vcrm-uat.pttl.com:8080/ptDataShow';
-
+	var PTDATASHOW_SERVER_ROOT = exports.PTDATASHOW_SERVER_ROOT = 'http://192.168.220.82:8080/ptDataShow';
 
 	// var _dgt = _dgt || [];
 	// window._dgt = _dgt;
@@ -416,8 +405,7 @@
 	// })();
 
 /***/ }),
-
-/***/ 4:
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -507,8 +495,7 @@
 	}
 
 /***/ }),
-
-/***/ 5:
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -516,7 +503,7 @@
 	Object.defineProperty(exports, "__esModule", {
 		value: true
 	});
-	exports.submitExcleGlobal = exports.sendAjaxNoWaiting = exports.sendAjax = undefined;
+	exports.submitExcleGlobal = exports.sendAjax = undefined;
 
 	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
@@ -564,9 +551,6 @@
 				} else if ((typeof body.pageNum == "undefined" || body.pageNum == null) && typeof body.pageSize != "undefined") {
 					alert("分页参数错误，请检查！");
 					return;
-				} else {
-					var pageSize = $('#' + pageDivId + " #page_selectPageNum option:selected").val();
-					body.pageSize = isNaN(pageSize) ? body.pageSize : pageSize;
 				}
 			}
 			param = getJsonString(objextUtil.clone(body)); //保留原来的  克隆一个提交参数
@@ -607,66 +591,6 @@
 				if (layerUtils.layer) {
 					layerUtils.waitingClose(); //关闭加载层
 				}
-				//console.error(e);
-			}
-		});
-	};
-	/**
-	 * ajax进行封装 不带加载
-	 * @param {*} service 请求路劲  类的命名空间+"/"+方法名的命名空间
-	 * @param {*} body    请求参数，如果有分页需要添加分页参数
-	 * @param {*} pageDivId 分页的div
-	 * @param {*} callback 回调函数
-	 * @param {*} Fn       当前需要分页的函数
-	 */
-	var sendAjaxNoWaiting = exports.sendAjaxNoWaiting = function sendAjaxNoWaiting(service, body, pageDivId, callback, Fn) {
-		var param = void 0;
-		if (body == null) {
-			param = new Object();
-		} else {
-			if (typeof body.pageNum == "undefined" && typeof body.pageSize == "undefined") {
-				//没有分页
-			} else {
-				if (typeof body.pageNum != "undefined" && (typeof body.pageSize == "undefined" || body.pageSize == null)) {
-					alert("分页参数错误，请检查！");
-					return;
-				} else if ((typeof body.pageNum == "undefined" || body.pageNum == null) && typeof body.pageSize != "undefined") {
-					alert("分页参数错误，请检查！");
-					return;
-				} else {
-					var pageSize = $('#' + pageDivId + " #page_selectPageNum option:selected").val();
-					body.pageSize = isNaN(pageSize) ? body.pageSize : pageSize;
-				}
-			}
-			param = getJsonString(objextUtil.clone(body)); //保留原来的  克隆一个提交参数
-		}
-		$.ajax({
-			type: 'POST',
-			url: Constant.SERVER_ROOT + '/pttlCrm/' + service,
-			data: param,
-			dataType: 'json',
-			success: function success(result) {
-				if (null != result && typeof result.isHaveSession == "string" && result.isHaveSession == "no") {
-					//没有登陆信息  跳转到登陆页面
-					//alert("用户未登陆，或者登陆超时，请重新登陆！");
-					var loginHtml = Constant.SERVER_ROOT + '/pttlCrm/login';
-					if ('' + Constant.LOCAL_SERVER_ROOT == "http://localhost:3000") {
-						loginHtml = Constant.LOCAL_SERVER_ROOT + '/page/login/login.html';
-					}
-					window.location.href = loginHtml;
-				} else if (null != result && typeof result.Error == "string") {
-					layerUtils.info(result.Error);
-				} else {
-					if (callback) {
-						callback(result);
-					}
-					//是否存在分页
-					if (typeof pageDivId != "undefined" && pageDivId != null && pageDivId != "") {
-						page.page({ fn: Fn, page: result.page, pageId: pageDivId });
-					}
-				}
-			},
-			error: function error(e) {
 				//console.error(e);
 			}
 		});
@@ -727,8 +651,6 @@
 				form += '</form>';
 				form += '<iframe name="iframeGloable" id="iframeGloable" style="display:none"></iframe>';
 				$("body").append(form);
-			} else {
-				$("#submitExcelGlobal").attr("action", service);
 			}
 			var inputHtml = "";
 			if (obj && (typeof obj === 'undefined' ? 'undefined' : _typeof(obj)) == "object") {
@@ -742,8 +664,7 @@
 	};
 
 /***/ }),
-
-/***/ 6:
+/* 6 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -793,8 +714,7 @@
 	};
 
 /***/ }),
-
-/***/ 7:
+/* 7 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -829,14 +749,13 @@
 	        $("#" + data.pageId).html("");
 	        return;
 	    }
-	    var pageSize = page.pageSize; //显示多少条记录
+	    var pageSize = page.pageSize;
 	    var fn = data.fn;
 	    if (!pageSize) {
 	        pageSize = 10;
 	    }
 	    var pageHtml = "<li class='skip skip_count'><span>共" + pageCount + "页</span><span>到第</span><input type='number' class='skip-num' min='1'/><span>页</span></li>";
 	    pageHtml += "<li class='skip_right_goto' val='" + pageCount + "' val1='" + pageSize + "'><a class='skip-right-icon'></a></li>";
-	    pageHtml += getSelectOptionHtml(pageSize);
 	    var options = {
 	        bootstrapMajorVersion: 2, //版本
 	        currentPage: currentPage, //当前页数
@@ -868,13 +787,8 @@
 	    $('#' + data.pageId).bootstrapPaginator(options);
 	    var liCount = $('#' + data.pageId + " li.skip_right_goto");
 	    if (typeof liCount != "undefined" && liCount.length > 0) {
-	        //跳页
 	        $('#' + data.pageId + " li.skip_right_goto").unbind("click").on("click", function (e) {
 	            gotoPageNum(this, data.pageId, fn);
-	        });
-	        //选择页码
-	        $('#' + data.pageId + " #page_selectPageNum").unbind("change").on("change", function (e) {
-	            fn(parseInt($(this).val()), 1);
 	        });
 	    }
 	}
@@ -927,21 +841,8 @@
 	    return true;
 	}
 
-	//获取分页的 select条目
-	function getSelectOptionHtml(pageSize) {
-	    var option = "<li>显示<select id='page_selectPageNum'>";
-	    if (pageSize == 10) option += "<option value='10' selected='selected'>10</option>";else option += "<option value='10'>10</option>";
-	    if (pageSize == 20) option += "<option value='20' selected='selected'>20</option>";else option += "<option value='20'>20</option>";
-	    if (pageSize == 50) option += "<option value='50' selected='selected'>50</option>";else option += "<option value='50'>50</option>";
-	    if (pageSize == 100) option += "<option value='100' selected='selected'>100</option>";else option += "<option value='100'>100</option>";
-	    if (pageSize == 200) option += "<option value='200' selected='selected'>200</option>";else option += "<option value='200'>200</option>";
-	    option += "</select>行</li>";
-	    return option;
-	}
-
 /***/ }),
-
-/***/ 8:
+/* 8 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -1022,9 +923,8 @@
 	 * 参数 attributes 是一个可选的字符串，包含属性 "g"、"i" 和 "m"，
 	 * 分别用于指定全局匹配、区分大小写的匹配和多行匹配。
 	 * ECMAScript 标准化之前，不支持 m 属性。如果 pattern 是正则表达式，而不是字符串，则必须省略该参数。
-	 * xmpFalg在div中显示标签
 	 */
-	var globReplace = exports.globReplace = function globReplace(str, replaceStr, resultStr, typeStr, xmpFalg) {
+	var globReplace = exports.globReplace = function globReplace(str, replaceStr, resultStr, typeStr) {
 		str = getValue(str);
 		str = str.replace(/doubleQM/g, "\""); //双引号替换
 		str = str.replace(/bigDY/g, ">"); //大于
@@ -1045,12 +945,6 @@
 		var rightStr = "\n";
 		if (resultStr && typeof resultStr == "string") {
 			rightStr = resultStr;
-		}
-		if (xmpFalg) {
-			str = str.replace(/&/g, "&amp;"); //
-			str = str.replace(/ /g, "&nbsp;"); //空格
-			str = str.replace(/>/g, "&gt;"); //大于
-			str = str.replace(/</g, "&lt;"); //小于
 		}
 		return str.replace(r, rightStr);
 	};
@@ -1095,8 +989,8 @@
 	};
 
 /***/ }),
-
-/***/ 10:
+/* 9 */,
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1241,8 +1135,9 @@
 	};
 
 /***/ }),
-
-/***/ 16:
+/* 11 */,
+/* 12 */,
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1285,8 +1180,20 @@
 	};
 
 /***/ }),
-
-/***/ 31:
+/* 14 */,
+/* 15 */,
+/* 16 */,
+/* 17 */,
+/* 18 */,
+/* 19 */,
+/* 20 */,
+/* 21 */,
+/* 22 */,
+/* 23 */,
+/* 24 */,
+/* 25 */,
+/* 26 */,
+/* 27 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -1336,8 +1243,41 @@
 	// }
 
 /***/ }),
-
-/***/ 74:
+/* 28 */,
+/* 29 */,
+/* 30 */,
+/* 31 */,
+/* 32 */,
+/* 33 */,
+/* 34 */,
+/* 35 */,
+/* 36 */,
+/* 37 */,
+/* 38 */,
+/* 39 */,
+/* 40 */,
+/* 41 */,
+/* 42 */,
+/* 43 */,
+/* 44 */,
+/* 45 */,
+/* 46 */,
+/* 47 */,
+/* 48 */,
+/* 49 */,
+/* 50 */,
+/* 51 */,
+/* 52 */,
+/* 53 */,
+/* 54 */,
+/* 55 */,
+/* 56 */,
+/* 57 */,
+/* 58 */,
+/* 59 */,
+/* 60 */,
+/* 61 */,
+/* 62 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1384,8 +1324,7 @@
 	}
 
 /***/ }),
-
-/***/ 75:
+/* 63 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1403,19 +1342,19 @@
 
 	var iframeUtils = _interopRequireWildcard(_iframeUtils);
 
-	var _upload = __webpack_require__(76);
+	var _upload = __webpack_require__(64);
 
 	var upload = _interopRequireWildcard(_upload);
 
-	var _backfill = __webpack_require__(77);
+	var _backfill = __webpack_require__(65);
 
 	var backfill = _interopRequireWildcard(_backfill);
 
-	var _report = __webpack_require__(78);
+	var _report = __webpack_require__(66);
 
 	var report = _interopRequireWildcard(_report);
 
-	var _save = __webpack_require__(79);
+	var _save = __webpack_require__(67);
 
 	var reportSave = _interopRequireWildcard(_save);
 
@@ -1423,12 +1362,6 @@
 
 	var load = exports.load = function load(data) {
 	    $("#body").html(render()); //加载静态页面
-
-	    var dragUrl = Constant.SERVER_ROOT + '/pttlCrm/res/js/lib/drag.js';
-	    if ('' + Constant.LOCAL_SERVER_ROOT == "http://localhost:3000") {
-	        dragUrl = Constant.LOCAL_SERVER_ROOT + '/js/lib/drag.js';
-	    }
-	    $.getScript(dragUrl, function () {}); //动态加载js,成功后，并执行回调函数  
 
 	    //删除上传的图片
 	    $(".img-box .del").on('click', function () {
@@ -1476,7 +1409,7 @@
 	        if (data.statusR && data.dateR && data.statusR != "草稿" && data.dateR != "") {
 	            $("#customerReportPopBtnSuccess").remove(); //移除草稿
 	        }
-	        $("#ContactAlert").append(getTreeHtml()); //加载树形
+	        $("#ContactAlert").html(getTreeHtml()); //加载树形
 	        initFn(data); //初始化数据
 	    }
 	};
@@ -1505,10 +1438,12 @@
 	        $("#search-lists").hide();
 	        $("#contactSearch").val("");
 	        backfill.load();
-	        /*if(!$("#DisplayContact").hasClass("initFlag")){
+         /**
+	        if (!$("#DisplayContact").hasClass("initFlag")) {
 	            $("#DisplayContact").addClass("initFlag");
 	            backfill.load();
-	        }*/
+	        }
+          **/
 	        $('.m-contact').slideDown();
 	        // let flag = $("#ContactAlert").css("right") == 0 ? false : true;
 	        var flag = $("#ContactAlert").css("left") == oWidth + "px" ? true : false;
@@ -1574,7 +1509,6 @@
 
 	function getTreeHtml() {
 	    var temp = '\n        <div class="header clearfix">\n            <i class="icon icon-back" id="ContactClose"></i>\n            <div class="search">\n                <input type="text" name="contactSearch" id="contactSearch" placeholder="\u8BF7\u8F93\u5165\u641C\u7D22\u5185\u5BB9">\n                <i class="icon icon-search" id="icon-search"></i>\n                <div class="search-lists" id="search-lists">\n                </div>\n            </div>\n        </div>\n        <div class="body">\n            <div class="content" id="contentBody"></div>\n        </div>\n        <div class="footer clearfix"></div>\n    ';
-	    // <a href="javascript:;" class="btn" id="ContactSure">确定<em></em></a>
 	    return temp;
 	}
 
@@ -1586,11 +1520,10 @@
 	}
 
 /***/ }),
-
-/***/ 76:
+/* 64 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
@@ -1600,10 +1533,6 @@
 	var _constant = __webpack_require__(3);
 
 	var Constant = _interopRequireWildcard(_constant);
-
-	var _layerUtils = __webpack_require__(1);
-
-	var layerUtils = _interopRequireWildcard(_layerUtils);
 
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -1665,7 +1594,7 @@
 	        swf: './js/lib/webuploader/Uploader.swf',
 
 	        // 文件接收服务端。
-	        server: Constant.SERVER_ROOT + '/pttlCrm/sys/file/upload',
+	        server: Constant.SERVER_ROOT + "/pttlCrm/sys/file/upload",
 
 	        // 选择文件的按钮。可选。
 	        // 内部根据当前运行是创建，可能是input元素，也可能是flash.
@@ -1689,7 +1618,7 @@
 	    });*/
 	    uploader.on('uploadSuccess', function (file, response) {
 	        $('#' + file.id).find('p.state').text('已上传');
-	        var hiddenli = '<div id = "' + file.id + '_picture">' + response.rowId + '</div>';
+	        var hiddenli = "<div id = \"" + file.id + "_picture\">" + response.rowId + "</div>";
 	        $list.append(hiddenli);
 	    });
 
@@ -1707,8 +1636,7 @@
 	        // thumbnailWidth x thumbnailHeight 为 100 x 100
 	        uploader.makeThumb(file, function (error, src) {
 	            if (error) {
-	                layerUtils.error("图片格式错误,不允许上传!");
-	                removeFile(file, $imagesBoxH);
+	                $img.replaceWith('<span>不能预览</span>');
 	                return;
 	            }
 
@@ -1755,7 +1683,7 @@
 
 	function delFile(file) {
 	    $.ajax({
-	        url: Constant.SERVER_ROOT + '/pttlCrm/sys/file/delImg',
+	        url: Constant.SERVER_ROOT + "/pttlCrm/sys/file/delImg",
 	        data: { 'rowId': $("#" + file.id + "_picture")[0].innerHTML },
 	        dataType: 'json',
 	        type: 'get',
@@ -1769,8 +1697,7 @@
 		}
 
 /***/ }),
-
-/***/ 77:
+/* 65 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2072,8 +1999,7 @@
 	}
 
 /***/ }),
-
-/***/ 78:
+/* 66 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2087,7 +2013,7 @@
 
 	var Constant = _interopRequireWildcard(_constant);
 
-	var _historyManager = __webpack_require__(31);
+	var _historyManager = __webpack_require__(27);
 
 	var historyManager = _interopRequireWildcard(_historyManager);
 
@@ -2095,7 +2021,7 @@
 
 	var StringUtils = _interopRequireWildcard(_StringUtils);
 
-	var _viewer = __webpack_require__(16);
+	var _viewer = __webpack_require__(13);
 
 	var viewer = _interopRequireWildcard(_viewer);
 
@@ -2131,6 +2057,10 @@
 	                $("#huaweiFD").val(StringUtils.globReplace(item.huaweiFD)); //华为FD
 	                $("#HuaweiExperienceStore").val(StringUtils.globReplace(item.huaweiExperienceStore)); //华为体验店
 	                $("#HuaweiFuse").val(StringUtils.globReplace(item.huaweiFuse)); //华为融合
+                /****
+	                $("#HuaweiProvincePackage").val(StringUtils.globReplace(item.huaweiProvincePackage)); 
+                  **/
+                  //华为省包
 	                $("#SamsungDivison").val(StringUtils.globReplace(item.xCommentsSanXing)); //三星事业部
 	                $("#FenXiaoDivison").val(StringUtils.globReplace(item.xCommentsFenxiao)); //大客户业务部
 	                $("#OtherInfor").val(StringUtils.globReplace(item.xCommentsOther)); //其他信息
@@ -2141,9 +2071,6 @@
 	                    $("#ContactUsers i.chate-del").on("click", function () {
 	                        $(this).parent().remove();
 	                    });
-	                    /*  $("#ContactUsers .user i.icon-close").on("click",function(){
-	                         $(this).parent().remove(); 
-	                     }); */
 	                } else {
 	                    $("#ContactUsers").html(""); //@人 
 	                }
@@ -2179,17 +2106,8 @@
 	                    $("#reportContent select").attr("disabled", "disabled");
 	                    $("#reportContent textarea").attr("disabled", "disabled");
 	                    $(".file-panel .cancel").remove();
-	                    //$("#ContactUsers .user i.icon-close").remove();
-	                    $("#ContactUsers i.chate-del").remove();
+	                    $("#ContactUsers .user i.icon-close").remove();
 	                }
-
-	                $.each($("#reportImportContent textarea[autoHeight]"), function () {
-	                    $(this).height($(this)[0].scrollHeight);
-	                });
-	                $("#reportImportContent textarea[autoHeight]").on("keydown", function () {
-	                    var newheight = $(this)[0].scrollHeight;
-	                    this.style.height = newheight + "px";
-	                });
 	            } else {
 	                $("#VisitTarget").val(""); //拜访对象
 	                $("#TargetPosition").val(""); //职务
@@ -2198,7 +2116,9 @@
 	                $("#huaweiFD").val(""); //华为FD
 	                $("#HuaweiExperienceStore").val(""); //华为体验店
 	                $("#HuaweiFuse").val(""); //华为融合
-
+                /***
+	                $("#HuaweiProvincePackage").val(""); //华为省包
+                  ***/
 	                $("#SamsungDivison").val(""); //三星事业部
 	                $("#FenXiaoDivison").val(""); //分销事业部
 	                $("#OtherInfor").val(""); //其他信息  
@@ -2216,18 +2136,6 @@
 	        return '\n\t\t\t\t<span val="' + item.empId + '" val1="' + item.atName + '">\n\t\t\t\t\t<i class="icon chate-del" val="' + item.empId + '"></i>' + item.atName + '\n\t\t\t\t</span>   \n            ';
 	    }).join('')) + '\n    ';
 	    return temp;
-	    /* let temp = 
-	    `
-	        ${list == null ? "" : list.map((item) => {
-	            return `
-	               <div class="user">
-	                    <i class="icon ${item.isDefault == '1' ? 'unAllowDel' : 'icon-close'}" val="${item.empId}"></i>
-	                    <span val="${item.empId}" val1="${item.atName}" val2="">${item.atName}</span>
-	                </div>
-	            `;
-	        }).join('')}
-	    `;
-	    return temp;  */
 	}
 	//附件 图片
 	function getActionAtt(list) {
@@ -2246,8 +2154,7 @@
 	}
 
 /***/ }),
-
-/***/ 79:
+/* 67 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2293,73 +2200,63 @@
 
 	var reportSubmit = '0';
 	function doAction(data) {
-	    debugger;
+    	window.writeReportStatus = 'loading';//后添加
 	    var content = "";
 	    $("#reportImportContent textarea").each(function () {
 	        var textVal = StringUtils.wrongCharacter($(this).val());
 	        data[$(this).attr("name")] = textVal;
 	        content += textVal;
 	    });
-	    var visitTarget = $("#VisitTarget").val();
-	    if (visitTarget == "") {
-	        layerUtils.info("请填写拜访对象！");
-	        return;
-	    }
-	    if (visitTarget.length > 50) {
-	        layerUtils.info("拜访对象数据长度超限！");
-	        return;
-	    }
-	    data["VisitTarget"] = visitTarget;
+	    /***data["VisitTarget"] = $("#VisitTarget").val();
+	    data["TargetPosition"] = $("#TargetPosition").val();
+	    data["VisitTime"] = $("#VisitTime").val();***/
+			var visitTarget = $("#VisitTarget").val();
+      if(visitTarget == ""){
+          layerUtils.info("请填写拜访对象！");
+          return ;
+      } 
+      if(visitTarget.length > 50){
+          layerUtils.info("拜访对象数据长度超限！");
+          return;
+      } 
+      data["VisitTarget"] = visitTarget;
 
-	    var targetPosition = $("#TargetPosition").val();
-	    if (targetPosition == "") {
-	        layerUtils.info("请填写职务！");
-	        return;
-	    }
-	    if (targetPosition.length > 50) {
-	        layerUtils.info("职务数据长度超限！");
-	        return;
-	    }
-	    data["TargetPosition"] = targetPosition;
+      var targetPosition = $("#TargetPosition").val();
+      if(targetPosition == ""){
+          layerUtils.info("请填写职务！");
+          return ;
+      } 
+      if(targetPosition.length > 50){
+          layerUtils.info("职务数据长度超限！");
+          return;
+      }
+      data["TargetPosition"] = targetPosition;
 
-	    var visitTime = $("#VisitTime").val();
-	    if (visitTime == "") {
-	        layerUtils.info("请填写拜访时长！");
-	        return;
-	    }
-	    data["VisitTime"] = visitTime;
+      var visitTime = $("#VisitTime").val();
+      if(visitTime == ""){
+          layerUtils.info("请填写拜访时长！");
+          return ;
+      } 
+      data["VisitTime"] = visitTime;
 
-	    var msg = "";
-	    var deptId = ['huaweiFD', 'HuaweiExperienceStore', 'HuaweiFuse', 'SamsungDivison', 'FenXiaoDivison', 'OtherInfor'];
-	    for (var i = 0; i < deptId.length; i++) {
-	        var temp = data[deptId[i]].replace(/[^\u4e00-\u9fa5]/gi, "");
-	        if (data[deptId[i]].length - temp.length + temp.length * 3 > 1500) {
-	            if (deptId[i] == 'huaweiFD') {
-	                msg = "华为FD内容长度超限!";
-	            }
-	            if (deptId[i] == 'HuaweiExperienceStore') {
-	                msg = "华为体验店内容长度超限!";
-	            }
-	            if (deptId[i] == 'HuaweiFuse') {
-	                msg = "华为融合内容长度超限!";
-	            }
-
-	            if (deptId[i] == 'SamsungDivison') {
-	                msg = "三星内容长度超限!";
-	            }
-	            if (deptId[i] == 'FenXiaoDivison') {
-	                msg = "大客户业务部内容长度超限!";
-	            }
-	            if (deptId[i] == 'OtherInfor') {
-	                msg = "其他信息内容长度超限!";
-	            }
-	            break;
-	        }
-	    }
-	    if (msg != "") {
-	        layerUtils.error(msg);
-	        return;
-	    }
+      var msg = "";
+      var deptId = ['huaweiFD','HuaweiExperienceStore','HuaweiFuse','SamsungDivison','FenXiaoDivison','OtherInfor'];
+      for (var i=0;i<deptId.length;i++){ 
+          var temp = data[deptId[i]].replace(/[^\u4e00-\u9fa5]/gi,"");
+          if(((data[deptId[i]].length - temp.length) + temp.length * 3) > 1500){
+              if(deptId[i] == 'huaweiFD'){msg = "华为FD内容长度超限!";}
+              if(deptId[i] == 'HuaweiExperienceStore'){msg = "华为体验店内容长度超限!";}
+              if(deptId[i] == 'HuaweiFuse'){msg = "华为融合内容长度超限!";}
+              if(deptId[i] == 'SamsungDivison'){msg = "三星内容长度超限!";}
+              if(deptId[i] == 'FenXiaoDivison'){msg = "大客户业务部内容长度超限!";}
+              if(deptId[i] == 'OtherInfor'){msg = "其他信息内容长度超限!";}
+              break;
+          }
+      }
+      if(msg != ""){
+          layerUtils.error(msg);
+          return;
+      }
 
 	    if (content == "") {
 	        layerUtils.info("请至少填写一个内容！");
@@ -2397,7 +2294,6 @@
 	        }
 	    });
 	    data.huaweiFuseTags = huaweiFuseTags;
-
 	    var samsungDivisonTags = "";
 	    $("#samsungDivisonTags button").each(function () {
 	        if ($(this).attr('class') == 'activ') {
@@ -2432,22 +2328,30 @@
 	    reportSubmit = '1';
 	    ajaxUtils.sendAjax("visit/customerVisitPlan/addOrUpdateCustomerReport", param, null, function (reslult) {
 	        if (reslult.status == "true") {
+            	window.writeReportStatus = 'completed';//后添加
 	            //if(data.ReportStatus == "已提交"){
 	            referenceParentHtmlFn("报告", data.row_Id); //刷新父页面
 	            //}
+            	if(data.ReportStatus == "已提交"){
+                	layerUtils.success('提交成功！', { time: 1000 });//后添加
+	            }else if(data.ReportStatus == "草稿"){
+                  layerUtils.success('保存成功！', { time: 1000 });//后添加     
+             	}else{
+                
+              }
+            	
 	            iframeUtils.hideSecondIframe(); //关闭
-	        } else if (reslult.message != null && reslult.message != '') {
-	            layerUtils.error(reslult.message);
-	        } else {
-	            layerUtils.error("保存失败！");
-	        }
+	        }else if(reslult.message != null && reslult.message != ''){
+            layerUtils.error(reslult.message);
+          } else {
+                layerUtils.error("保存失败！");
+            }
 	        reportSubmit = '0';
 	    });
 	}
 
 /***/ }),
-
-/***/ 80:
+/* 68 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2469,7 +2373,7 @@
 
 	var Constant = _interopRequireWildcard(_constant);
 
-	var _historyManager = __webpack_require__(31);
+	var _historyManager = __webpack_require__(27);
 
 	var historyManager = _interopRequireWildcard(_historyManager);
 
@@ -2488,7 +2392,7 @@
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 	var load = exports.load = function load(data) {
-	    $("#body").html(render()); //加载静态页面
+	    $("#body").html(render()); //加载静态页面
 	    $(window).resize(function () {
 	        initReportCss();
 	    });
@@ -2503,14 +2407,33 @@
 	    $("#csAddress").val(data.address);
 	    if (data.clickType[0] == "false") {
 	        //签到不可用
+        	$(".customersign-active").remove();//后添加
+          $(".customersign-remarktextarea2 .remarktextimg").remove();//后添加
 	        doLookAction(data);
 	    } else {
 	        //签到可用
-	        //inintPageHtmlFn();
+	        inintPageHtmlFn();//PC注释掉 移动端要解开
 	        initMap();
-	        $("#longitude").attr("style", "display:none;"); //签到经度
+	        $("#longitude").attr("style", "display:none;"); //签到经度
 	        $("#latitude").attr("style", "display:none;"); //签到纬度
 	        $("#address").attr("style", "display:none;"); //地址
+        	
+        	//签到 后添加
+          $(".customersign-active").unbind('click').on('click', function() {
+              if ($("#address").html() == "") {
+                  layerUtils.info("请等待地图加载完毕！");
+                  return;
+              }
+              doAction(data);
+          });
+        
+       	// $(".customersign-active").unbind('click').on('click', function() {
+         	// if ($("#address").html() == "") {
+         	// layerUtils.info("请等待地图加载完毕！");
+         	// return;
+         	// }
+         	// doAction(data);
+         	// });
 	    }
 
 	    /** PC端 禁用签到 */
@@ -2552,6 +2475,7 @@
 	            map.addOverlay(mk);
 	            map.panTo(point);
 	            showPosition(point, true); //百度地图WebAPI 坐标转地址
+           		 map.enableScrollWheelZoom(true);
 	        } else {
 	            initMap();
 	        }
@@ -2563,6 +2487,7 @@
 	 */
 	var signInOutScope = '0';
 	function doAction(data) {
+    	window.signStatus = 'loading';//后添加
 	    $("#customersign-content .customersign-mapcontent-textbottomspan").each(function () {
 	        data[$(this).attr("name")] = $(this).html();
 	    });
@@ -2583,7 +2508,9 @@
 	                signIn(param, referenceParentHtmlFn, data);
 	            } else {
 	                signInOutScope = '1';
+                	window.closeModel();
 	                layerUtils.info("当前签到位置与客户地址距离超过500米,请填写备注信息！");
+                	
 	                return;
 	            }
 	        });
@@ -2594,13 +2521,14 @@
 
 	var signSubmit = '0';
 	function signIn(param, referenceParentHtmlFn, data) {
-	    if (signSubmit == '1') {
+	    if (signSubmit == '1') {
 	        return;
 	    }
 	    signSubmit = '1';
 	    param.signInOutScope = signInOutScope;
 	    ajaxUtils.sendAjax("visit/customerVisitPlan/addCustomerSignIn", param, null, function (reslult) {
 	        if (reslult.status == "true") {
+            	window.signStatus = 'completed';//后添加
 	            layerUtils.success("签到成功！", { time: 1000 });
 	            referenceParentHtmlFn("签到", data.row_Id); //刷新父页面
 	            iframeUtils.hideSecondIframe(); //关闭
@@ -2649,6 +2577,7 @@
 	    map.addOverlay(mk);
 	    map.panTo(point);
 	    showPosition(point);
+    map.enableScrollWheelZoom(true);
 	    // $.ajax({
 	    //         url: `${Constant.SERVER_ROOT}/pttlCrm/visit/customerVisitPlan/getLocation`,
 	    //         dataType: 'json',
@@ -2721,8 +2650,7 @@
 	}
 
 /***/ }),
-
-/***/ 81:
+/* 69 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2744,7 +2672,7 @@
 
 	var Constant = _interopRequireWildcard(_constant);
 
-	var _historyManager = __webpack_require__(31);
+	var _historyManager = __webpack_require__(27);
 
 	var historyManager = _interopRequireWildcard(_historyManager);
 
@@ -2777,15 +2705,29 @@
 	    $("#csLatitude").val(data.latitude);
 	    $("#csAddress").val(data.address);
 	    if (data.clickType[1] == "false") {
-	        //签退不可用       
+	        //签退不可用
+        	$(".customersign-active").remove();//后添加
+        	$(".customersign-remarktextarea .remarktextimg").remove();//后添加
 	        doLookAction(data);
 	    } else {
 	        //签到退可用
-	        //inintPageHtmlFn();   
+	        inintPageHtmlFn();//PC端注释掉 移动端要解开  
 	        initMap();
 	        $("#longitude").attr("style", "display:none;"); //签到经度
 	        $("#latitude").attr("style", "display:none;"); //签到纬度
 	        $("#address").attr("style", "display:none;"); //地址
+        	
+        	//签退 后添加
+        	$("#csLongitude").val(data.longitude);
+          $("#csLatitude").val(data.latitude);
+          $("#csAddress").val(data.address);
+          $(".customersign-active").unbind().on('click', function() {
+              if ($("#address").html() == "") {
+                  layerUtils.info("请等待定位加载完毕");
+                  return;
+              }
+              doAction(data);
+          });
 	    }
 
 	    /** PC端 禁用签退 */
@@ -2818,7 +2760,7 @@
 	            $("#longitude").html(signMap.assignOutLongitude); //签退经度
 	            $("#latitude").html(signMap.assignOutLatitude); //签退纬度
 	            $("#remarktextname").val(StringUtils.globReplace(signMap.assignOutComments, "ltbrgt")); //签退备注
-
+							$("#remarktextname").attr("disabled", "disabled");//后添加
 	            //地图显示
 	            var map = new BMap.Map("allmap");
 	            var point = new BMap.Point(signMap.assignOutLongitude, signMap.assignOutLatitude);
@@ -2827,6 +2769,7 @@
 	            map.addOverlay(mk);
 	            map.panTo(point);
 	            showPosition(point, true); //百度地图WebAPI 坐标转地址
+           		 map.enableScrollWheelZoom(true);
 	        } else {
 	            initMap();
 	        }
@@ -2839,6 +2782,7 @@
 	 */
 	var signOutOutScope = '0';
 	function doAction(data) {
+    	window.signOutStatus = 'loading';//后添加
 	    $("#customersign-content .customersign-mapcontent-textbottomspan").each(function () {
 	        data[$(this).attr("name")] = $(this).html();
 	    });
@@ -2859,6 +2803,7 @@
 	                signOut(param, referenceParentHtmlFn, data);
 	            } else {
 	                signOutOutScope = '1';
+                	window.closeModel();
 	                layerUtils.info("当前签出位置与签到地址距离超过500米,请填写备注信息！");
 	                return;
 	            }
@@ -2877,6 +2822,7 @@
 	    param.signOutOutScope = signOutOutScope;
 	    ajaxUtils.sendAjax("visit/customerVisitPlan/addCustomerSignOut", param, null, function (reslult) {
 	        if (reslult.status == "true") {
+            	window.signOutStatus = 'completed';//后添加
 	            layerUtils.success("签出成功！", { time: 1000 });
 	            referenceParentHtmlFn("签出", data.row_Id); //刷新父页面
 	            iframeUtils.hideSecondIframe(); //关闭
@@ -2914,7 +2860,7 @@
 	    map.addOverlay(mk);
 	    map.panTo(point);
 	    showPosition(point);
-
+map.enableScrollWheelZoom(true);
 	    // $.ajax({
 	    //         url: `${Constant.SERVER_ROOT}/pttlCrm/visit/customerVisitPlan/getLocation`,
 	    //         dataType: 'json',
@@ -2985,6 +2931,5 @@
 	}
 
 /***/ })
-
-/******/ });
+/******/ ]);
 //# sourceMappingURL=customerVisitInfo.map

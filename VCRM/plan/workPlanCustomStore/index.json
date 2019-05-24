@@ -1,8 +1,11 @@
 {
   "version": "0.1",
   "id": "workPlanCustomStore",
-  "targetURL": "http://pttlcrm.com/pttlCrm/res/page/visitManager/customerWorkspace/customerNewPlanPop.html",
+  "targetURL": "http://192.168.220.82:8080/pttlCrm/res/page/visitManager/customerWorkspace/customerNewPlanPop.html",
   "jsFile": "index.js",
+  "requires": {
+    "index": "../index/index.json"
+  },
   "chineseName": "工作计划中的客户和门店列表(工作台)",
   "description": "",
   "controls": {
@@ -10,6 +13,10 @@
       "location": {
         "data": {
           "tagName": "DIV"
+        },
+        "userData": {
+          "data": [],
+          "force": false
         },
         "locators": [
           {
@@ -59,6 +66,20 @@
           "toContextId": "context7_MAgw2r"
         }
       ]
+    },
+    "flow27_7KXEVR": {
+      "fromContextId": "context7_MAgw2r",
+      "fromAction": "doAction",
+      "fromControlId": "control38_ZMVudg",
+      "toContexts": [
+        {
+          "toContextId": "context7_MAgw2r"
+        },
+        {
+          "toContextId": "context1_ZpWnXN",
+          "toModelId": "index"
+        }
+      ]
     }
   },
   "pages": {
@@ -94,7 +115,7 @@
     "page/urls": {
       "contexts": {
         "context7_MAgw2r": [
-          "pttlcrm.com/pttlCrm/res/page/visitManager/customerWorkspace/customerNewPlanPop.html"
+          "192.168.220.82:8080/pttlCrm/res/page/visitManager/customerWorkspace/customerNewPlanPop.html"
         ]
       }
     },
