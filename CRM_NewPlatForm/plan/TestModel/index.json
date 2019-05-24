@@ -4,7 +4,8 @@
   "targetURL": "http://192.168.220.82:8080/pttlCrm/res/yspHome.html",
   "jsFile": "index.js",
   "requires": {
-    "TestModel": "../TestModel/index.json"
+    "TestModel": "../TestModel/index.json",
+    "index": "../index/index.json"
   },
   "chineseName": "测试动静分离开发模板",
   "description": "只做测试 ,随时干掉",
@@ -185,6 +186,20 @@
         },
         {
           "toContextId": "context92_TDKuvB"
+        }
+      ]
+    },
+    "flow300_1De4wK": {
+      "fromContextId": "context92_TDKuvB",
+      "fromAction": "doAction",
+      "fromControlId": "control354_9MmhwH",
+      "toContexts": [
+        {
+          "toContextId": "context92_TDKuvB"
+        },
+        {
+          "toContextId": "context0_pD8h1P",
+          "toModelId": "index"
         }
       ]
     }
