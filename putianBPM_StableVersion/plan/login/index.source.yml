@@ -1,0 +1,34 @@
+getData_control0_N7zrZx: |
+  if (elem) {
+    var data = [];
+    var ipts = elem.querySelectorAll('.mini-textbox-input');
+    var btnVal = elem.querySelectorAll('.log');
+    data.push(ipts[0].value);
+    data.push(ipts[1].value);
+    data.push(btnVal[0].value);
+
+    if (elem.querySelector("#userId").querySelector(".mini-errorIcon")) {
+      data.push(true);
+    } else {
+      data.push(false);
+    }
+
+    ;
+
+    if (elem.querySelector("#password").querySelector(".mini-errorIcon")) {
+      data.push(true);
+    } else {
+      data.push(false);
+    }
+
+    if (elem.querySelector("#error")) {
+      data.push(elem.querySelector("#error").textContent);
+    } else {
+      data.push("");
+    }
+
+    return data;
+  }
+  return "";
+doAction_uiControl0_W1BKWP: "if (data.eventType == 'change') {\n  var data = data.dataCustom;\n\n  if (data[0] == 'ysp-login-card-loginUserName') {\n    $(elem).find('.mini-textbox-input').eq(0).val(data[1]);\n    $(elem).find('.mini-textbox-input').eq(0).trigger(\"change\");\n  } else if (data[0] == 'ysp-login-card-loginPassWord') {\n    $(elem).find('.mini-textbox-input').eq(1).val(data[1]);\n  }\n} else if (data.eventType == 'click') {\n  $(elem).find('.log').eq(0).click();\n} else if (data.eventType == \"cancel\") {\n  ysp.customHelper.back();\n} else if (data.eventType == \"login\") {\n  try {\n  \tif(ysp.appMain.isAndroid()){\n      var loginName = yspUser.getUsername('http://192.168.220.51:8000/ptsoa/coframe/auth/login/login.jsp#');\n      var passWord = yspUser.getPassword('http://192.168.220.51:8000/ptsoa/coframe/auth/login/login.jsp#');\n      var timer = setInterval(function () {\n        if (elem && elem.querySelectorAll('.mini-textbox-input').length > 0 && elem.querySelector('.log')) {\n          elem.querySelectorAll('.mini-textbox-input')[0].value = loginName;\n          elem.querySelectorAll('.mini-textbox-input')[1].value = passWord;\n          elem.querySelector('.log').click();\n          clearInterval(timer);\n        }\n      }, 1000);\n    }else if(ysp.appMain.isIOS()){\n      top.loginBPM = function(username,password){\n        alert(\"调用成功!\");\n        var timer = setInterval(function () {\n        if (elem && elem.querySelectorAll('.mini-textbox-input').length > 0 && elem.querySelector('.log')) {\n            elem.querySelectorAll('.mini-textbox-input')[0].value = username;\n            elem.querySelectorAll('.mini-textbox-input')[1].value = password;\n            elem.querySelector('.log').click();\n            clearInterval(timer);\n          }\n        }, 1000);\n      }\n      top.EAPI.postMessageToNative('loginBPM', null);\n    }\n  } catch (e) {\n    alert(e);\n  }\n}\n"
+getTemplate_uiControl0_W1BKWP: "import {Component} from 'react';\nexport default class extends Component{\n\tcomponentWillMount(){\n\tvar _this = this;\n\tvar handler = _this.props.customHandler;\n\tif(handler){\n\thandler({\n\teventType: 'login'\n\t});\n\t}\n\t}\n  render(){\n   const\t{customData,customHandler}=this.props;\n    return (\n      <div className='ysp-login-background'>\n      \t<div className='ysp-login-card'>\n          <div className='ysp-login-card-user'>\n        \t\t<span className='user'></span>\n          \t<input className='ysp-login-card-loginUserName' type='text' defaultValue={customData[0]} onChange={(e)=>{customHandler({data:[e.target.className,e.target.value],eventType:'change'})}}/>\n            {customData[3]? <span className=\"ysp_user_errorIcon\"></span>:<span></span>}\n        \t</div>\n          <div className='ysp-login-card-pass'>\n          \t<span className='pass'></span>\n        \t\t<input className='ysp-login-card-loginPassWord' type='password' defaultValue={customData[1]} onChange={(e)=>{customHandler({data:[e.target.className,e.target.value],eventType:'change'})}} defaultValue={customData[1]}/>\n            {customData[4]? <span className=\"ysp_user_errorIcon\"></span>:<span></span>}\n        \t</div>\n        \t<div className=\"ysp-login-card-btnBody\">\n            <AMUI.Button style={{width:'50%'}} block amStyle='primary' onClick={(e)=>{customHandler({eventType:'click'})}}>{customData[2]}</AMUI.Button>\n            <AMUI.Button style={{width:'50%'}} block amStyle='primary' onClick={(e)=>{customHandler({eventType:'cancel'})}}>取消</AMUI.Button>\n          </div>\n          {customData[5]==\"\"? <div></div>:<div className=\"ysp_error_tip\" style={{color:\"red\",textAlign:\"center\"}}>{customData[5]}</div>}\n   \t\t\t</div>   \n      </div>\n    )\n  }\n}"
