@@ -728,6 +728,6 @@
   "default_url": "http://pttlcrm.com/pttlCrm/res/index.html",
   "scope": "CRM_NewPlatForm",
   "start_url": "http://pttlcrm.com/pttlCrm/res/index.html",
-  "update_time": 1558678035710,
+  "update_time": 1558925888830,
   "runtime_env": "1webview"
 }

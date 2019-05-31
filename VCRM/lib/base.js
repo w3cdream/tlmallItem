@@ -161,6 +161,21 @@
       });
     }
   }
+  var ptDateshowLogin = function(userId,encoder){
+        if(encoder && userId){
+          var encoderXHR = new XMLHttpRequest();
+          encoderXHR.onreadystatechange = function(){
+            if(encoderXHR.readyState == 4){
+              debugger;
+              //console.log(encoderXHR.response);
+            }
+          }
+          //4G网络下无法通过请求  , 暂时通过GET请求解决 . 
+        encoderXHR.open('GET','http://pttlcrm.com/ptDataShow/login/crmLogin?filter_userId='+userId+'&encoder='+encoder);
+          //encoderXHR.send({'filter_userId':'ZHAOWEI','encoder':'WkhBT1dFSSswOC8wNy8yMDE4IDIwOjE0OjUy'});
+          encoderXHR.send();
+        }
+  }
   //安卓端 . 登录方式 弃用密码代填. 暂时为独立方法,看安卓是否符合整合登录前提 , 待安卓与IOS客户端同步后整合登录方法.
   topWin.AndroidLoginIn = function(user,password){
     if(user == '' || password == ''){
@@ -168,6 +183,7 @@
       return ;
     }
     if(user&&password){
+      ysp.customHelper.logLoginName = user;
       var currentAwin = ysp.runtime.Browser.activeBrowser.contentWindow;
       var EnCoderXhr = new XMLHttpRequest();
       EnCoderXhr.onreadystatechange = function(){
@@ -177,6 +193,9 @@
           var encrypPublicKey = new RSAKeyPair(param.publicExponent,'',param.modulus);
           var pwd = encryptedString(encrypPublicKey,encodeURIComponent(password));
           var body = {'loginName':user,'password':pwd,'encoder':param.encoder};
+          setTimeout(function(){
+            ptDateshowLogin(user,param.encoder);
+          },3000)
           body = JSON.stringify(body);
           var LoginXhr = new XMLHttpRequest();
           LoginXhr.onreadystatechange = function(){
@@ -207,6 +226,7 @@
                 }
               }
               getAllMenu(currentAwin,MenuList);
+              getposition();
             }else if(EnCoderXhr.status>=400 && EnCoderXhr.readyState == 4){
               //loginTimeOut('登录失败,接口返回错误,是否刷新重试');
             }
