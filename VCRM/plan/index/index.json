@@ -183,14 +183,16 @@
     "page/title": {
       "contexts": {
         "context1_ZpWnXN": [
-          "太力销售管理可视化系统"
+          "太力销售管理可视化系统",
+          ""
         ]
       }
     },
     "page/urls": {
       "contexts": {
         "context1_ZpWnXN": [
-          "192.168.220.82:8080/pttlCrm/res/index.html"
+          "192.168.220.82:8080/pttlCrm/res/index.html",
+          "192.168.220.82:8080/pttlCrm/login"
         ]
       }
     },
@@ -397,6 +399,11 @@
             "notice_informs",
             "sidebarGroove",
             "timeShow"
+          ],
+          [
+            "loginButton",
+            "loginName",
+            "password"
           ]
         ]
       }
@@ -744,6 +751,17 @@
             "title",
             "u-help",
             "u-time"
+          ],
+          [
+            "key-icon",
+            "login-btn",
+            "login-container",
+            "login-container-form",
+            "login-fieldset",
+            "login-input-text",
+            "login-welcome",
+            "user-icon",
+            "wrapper"
           ]
         ]
       }
@@ -860,6 +878,20 @@
             "LI/DIV/I",
             "UL/LI/A",
             "UL/LI/DIV"
+          ],
+          [
+            "-/-/DIV",
+            "-/-/SCRIPT",
+            "-/DIV/FORM",
+            "DIV/DIV/A",
+            "DIV/DIV/DIV",
+            "DIV/DIV/I",
+            "DIV/DIV/INPUT-checkbox",
+            "DIV/DIV/INPUT-password",
+            "DIV/DIV/INPUT-text",
+            "DIV/DIV/LABEL",
+            "DIV/FORM/DIV",
+            "FORM/DIV/DIV"
           ]
         ]
       }

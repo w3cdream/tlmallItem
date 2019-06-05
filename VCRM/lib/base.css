@@ -16898,3 +16898,14 @@ div[data-ysp-modelid="stockInquire"] .ysp-header-edit-icon {
   font-size: 14px;
 }
 /*****************************分货客户查询end*******************************************/
+/*     页面加载时间输入     */
+.timeScope {
+  position: fixed;
+  color: #fff;
+  background: rgba(3, 3, 3, 0.5);
+  width: 80px;
+  height: 35px;
+  bottom: 0;
+  text-align: center;
+  line-height: 35px;
+}
