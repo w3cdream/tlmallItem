@@ -1,7 +1,7 @@
 {
   "version": "0.1",
   "id": "infomationInput",
-  "targetURL": "http://192.168.220.82:8080/pttlCrm/res/page/psi/customerDayPsi.html?rowId=11994",
+  "targetURL": "http://pttlcrm.com/pttlCrm/res/page/psi/customerDayPsi.html?rowId=11994",
   "jsFile": "index.js",
   "requires": {
     "index": "../index/index.json"
@@ -214,45 +214,6 @@
       "monitored": false,
       "frameXPath": "",
       "componentType": "custom"
-    },
-    "control379_FaJ7bh": {
-      "location": {
-        "data": {
-          "tagName": "TABLE"
-        },
-        "userData": {
-          "data": [],
-          "force": false
-        },
-        "locators": [
-          {
-            "id": "@id/word",
-            "prob": 3,
-            "value": [
-              "descendant::DIV[@id=\"dayPSI\"]//TABLE[@id=\"psiEnterTable\"]",
-              "descendant::TABLE[@id=\"psiEnterTable\"]"
-            ]
-          },
-          {
-            "id": "@class/word",
-            "prob": 1,
-            "value": "DIV.collectionPSIentercontent DIV.collectionPSIentercontentborder TABLE.table.collectionPSI-table"
-          },
-          {
-            "id": "path/ordinal",
-            "prob": 1,
-            "value": "/HTML[1]/BODY[1]/DIV[1]/DIV[2]/DIV[2]/TABLE[1]"
-          }
-        ]
-      },
-      "events": {
-        "onGetData": "getData_control379_FaJ7bh"
-      },
-      "intendedRole": "custom",
-      "roles": "element,link,custom",
-      "monitored": true,
-      "frameXPath": "",
-      "componentType": "custom"
     }
   },
   "contexts": {
@@ -262,12 +223,11 @@
         "control212_Cymneo",
         "control213_TwrNlh",
         "control204_50rAzZ",
-        "control377_epo1DG",
-        "control379_FaJ7bh"
+        "control377_epo1DG"
       ],
       "anchors": [],
       "urlAnchor": [
-        "^http:\\/\\/192\\.168\\.220\\.82:8080\\/pttlCrm\\/res\\/page\\/psi\\/customerDayPsi\\.html.*"
+        "^http:\\/\\/pttlcrm\\.com\\/pttlCrm\\/res\\/page\\/psi\\/customerDayPsi\\.html.*"
       ]
     }
   },
@@ -342,16 +302,6 @@
         {
           "toContextId": "context1_ZpWnXN",
           "toModelId": "index"
-        }
-      ]
-    },
-    "flow299_TbVFcE": {
-      "fromContextId": "context53_oR8JhD",
-      "fromAction": "doAction",
-      "fromControlId": "control379_FaJ7bh",
-      "toContexts": [
-        {
-          "toContextId": "context53_oR8JhD"
         }
       ]
     }
@@ -434,21 +384,6 @@
               }
             }
           }
-        },
-        {
-          "id": "uiControl365_VArUX4",
-          "controlId": "control379_FaJ7bh",
-          "display": {
-            "adapterId": "custom",
-            "type": "custom",
-            "adapter": {
-              "templateType": "react",
-              "events": {
-                "onDoAction": "doAction_uiControl365_VArUX4",
-                "onGetTemplate": "getTemplate_uiControl365_VArUX4"
-              }
-            }
-          }
         }
       ]
     }
@@ -465,14 +400,14 @@
     "page/urls": {
       "contexts": {
         "context53_oR8JhD": [
-          "192.168.220.82:8080/pttlCrm/res/page/psi/customerDayPsi.html?rowId=11994",
-          "192.168.220.82:8080/pttlCrm/res/page/psi/customerDayPsi.html?rowId=1-5SKO7Q",
-          "192.168.220.82:8080/pttlCrm/res/page/psi/customerDayPsi.html?rowId=1-HP70",
-          "192.168.220.82:8080/pttlCrm/res/page/psi/customerWeekPsi.html?rowId=11994",
-          "192.168.220.82:8080/pttlCrm/res/page/psi/customerDayPsi.html?rowId=10263",
-          "192.168.220.82:8080/pttlCrm/res/page/psi/customerDayPsi.html?rowId=11212",
-          "192.168.220.82:8080/pttlCrm/res/page/psi/customerDayPsi.html?rowId=10702",
-          "192.168.220.82:8080/pttlCrm/res/page/psi/customerDayPsi.html?rowId=10251&userId=C101436"
+          "pttlcrm.com/pttlCrm/res/page/psi/customerDayPsi.html?rowId=11994",
+          "pttlcrm.com/pttlCrm/res/page/psi/customerDayPsi.html?rowId=1-5SKO7Q",
+          "pttlcrm.com/pttlCrm/res/page/psi/customerDayPsi.html?rowId=1-HP70",
+          "pttlcrm.com/pttlCrm/res/page/psi/customerWeekPsi.html?rowId=11994",
+          "pttlcrm.com/pttlCrm/res/page/psi/customerDayPsi.html?rowId=10263",
+          "pttlcrm.com/pttlCrm/res/page/psi/customerDayPsi.html?rowId=11212",
+          "pttlcrm.com/pttlCrm/res/page/psi/customerDayPsi.html?rowId=10702",
+          "pttlcrm.com/pttlCrm/res/page/psi/customerDayPsi.html?rowId=10251&userId=C101436"
         ]
       }
     },

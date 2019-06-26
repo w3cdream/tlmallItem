@@ -23,13 +23,13 @@
       if (data.eventType == 'AndroidBack') {
         var pageId = window.beforePageId;if (parent.EAPI.isAndroid() && pageId == "context51_PhTFP3") {
           //history.back();
-          var url = "http://192.168.220.82:8080/pttlCrm/res/page/psi/customerInfocollection.html"; //更换返回方式,跳回至信息录入
+          var url = "http://pttlcrm.com/pttlCrm/res/page/psi/customerInfocollection.html"; //更换返回方式,跳回至信息录入
           ysp.customHelper.AndroidBackURL = url;
         } else if (parent.EAPI.isIOS() && pageId == "context51_PhTFP3") {
-          var url = "http://192.168.220.82:8080/pttlCrm/res/page/psi/customerInfocollection.html"; //更换返回方法 - 跳回至信息录入
+          var url = "http://pttlcrm.com/pttlCrm/res/page/psi/customerInfocollection.html"; //更换返回方法 - 跳回至信息录入
           ysp.customHelper.AndroidBackURL = url;
         } else if (parent.EAPI.isIOS() && pageId == "context2_15cCKI") {
-          var urls = "http://192.168.220.82:8080/pttlCrm/res/page/visitManager/customerWorkspace/customerWorkspace.html"; //更换返回方法 - 跳回至工作台
+          var urls = "http://pttlcrm.com/pttlCrm/res/page/visitManager/customerWorkspace/customerWorkspace.html"; //更换返回方法 - 跳回至工作台
           ysp.customHelper.AndroidBackURL = urls;
         } else {
           ysp.customHelper.AndroidBackFlag = 'AndroidHistory';
@@ -39,13 +39,13 @@
       } else if (data.eventType == 'back') {
         var pageId = window.beforePageId;if (parent.EAPI.isAndroid() && pageId == "context51_PhTFP3") {
           //history.back();
-          var url = "http://192.168.220.82:8080/pttlCrm/res/page/psi/customerInfocollection.html"; //更换返回方式,跳回至信息录入
+          var url = "http://pttlcrm.com/pttlCrm/res/page/psi/customerInfocollection.html"; //更换返回方式,跳回至信息录入
           ysp.customHelper.AndroidBackFn();
         } else if (parent.EAPI.isIOS() && pageId == "context51_PhTFP3") {
-          var url = "http://192.168.220.82:8080/pttlCrm/res/page/psi/customerInfocollection.html"; //更换返回方法 - 跳回至信息录入
+          var url = "http://pttlcrm.com/pttlCrm/res/page/psi/customerInfocollection.html"; //更换返回方法 - 跳回至信息录入
           ysp.customHelper.BackReload(url);
         } else if (parent.EAPI.isIOS() && pageId == "context2_15cCKI") {
-          var urls = "http://192.168.220.82:8080/pttlCrm/res/page/visitManager/customerWorkspace/customerWorkspace.html"; //更换返回方法 - 跳回至工作台
+          var urls = "http://pttlcrm.com/pttlCrm/res/page/visitManager/customerWorkspace/customerWorkspace.html"; //更换返回方法 - 跳回至工作台
           ysp.customHelper.BackReload();
         } else {
           history.back();
@@ -153,20 +153,6 @@
     getTemplate_uiControl363_yyGTNA: function () {
       var selfTemplate = 'module.exports = React.createClass({\n  render: function() {\n    return (\n      <div style={{margin:\'10px\',fontSize:\'20px\'}} onClick={()=>{\n          const {customHandler} = this.props;\n          customHandler({\n            eventType:\'saveEnterData\'\n          })\n        }}>\n \xA0 \xA0 \xA0 \xA0\u4FDD\u5B58\n \xA0 \xA0 \xA0</div>\n    )\n  }\n});';
       return '\'use strict\';\n\nmodule.exports = React.createClass({\n  displayName: \'exports\',\n\n  render: function render() {\n    var _this = this;\n\n    return React.createElement(\n      \'div\',\n      { style: { margin: \'10px\', fontSize: \'20px\' }, onClick: function onClick() {\n          var customHandler = _this.props.customHandler;\n\n          customHandler({\n            eventType: \'saveEnterData\'\n          });\n        } },\n      \'\\xA0 \\xA0 \\xA0 \\xA0\\u4FDD\\u5B58 \\xA0 \\xA0 \\xA0\'\n    );\n  }\n});';
-    },
-    getData_control379_FaJ7bh: function (elem) {
-      if (!elem) return;if (ysp.customHelper.informationEntry.isSave) {
-        ysp.customHelper.informationEntry.backfill(elem, ['采集SO', '采集I'], ysp.customHelper.informationEntry.saveData);
-      }return ysp.customHelper.informationEntry.isSave;
-    },
-    doAction_uiControl365_VArUX4: function (data, elem) {
-      if (data.eventType == 'click') {
-        debugger;ysp.customHelper.informationEntry.backfill(elem, ['采集SO', '采集I'], ysp.customHelper.informationEntry.saveData);
-      }
-    },
-    getTemplate_uiControl365_VArUX4: function () {
-      var selfTemplate = 'module.exports = React.createClass({\n  componentDidMount:function(){\n    if(this.props.customData){\n      const {customHandler} = this.props;\n      customHandler({\n \xA0 \xA0 \xA0 \xA0\'eventType\':\'click\'\n      })\n    }\n  },\n \xA0render: function() {\n    return (\n      <div>\n \xA0 \xA0 \xA0 \xA0\u6D4B\u8BD5\n \xA0 \xA0 \xA0</div>\n    )\n  }\n});';
-      return '\'use strict\';\n\nmodule.exports = React.createClass({\n  displayName: \'exports\',\n\n  componentDidMount: function componentDidMount() {\n    if (this.props.customData) {\n      var customHandler = this.props.customHandler;\n\n      customHandler({\n        \'eventType\': \'click\'\n      });\n    }\n  },\n  render: function render() {\n    return React.createElement(\n      \'div\',\n      null,\n      \'\\xA0 \\xA0 \\xA0 \\xA0\\u6D4B\\u8BD5 \\xA0 \\xA0 \\xA0\'\n    );\n  }\n});';
     }
   }, "infomationInput");
 })(window, ysp);

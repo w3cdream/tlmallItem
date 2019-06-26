@@ -39,7 +39,7 @@
       } //图标尺寸  48 * 48   文字大小 17px
       if (data.eventType == 'click_infomation') {
         var src = data.dataCustom.url;var title = data.dataCustom.title;if (title == '拜访总览') {
-          ysp.customHelper.openWindow('http://192.168.220.82:8080/pttlCrm/res/yspHome.html');return;
+          ysp.customHelper.openWindow('http://pttlcrm.com/pttlCrm/res/yspHome.html');return;
         }openUrl(src, title);
       } //请求大数据参数接口 . 拼接地址进行跳转
       function openUrl(src, title) {
@@ -53,7 +53,7 @@
               src = title == '产品上下架' && src.indexOf('?') == -1 && src.indexOf('&') == -1 ? src + '/querySku?a=1&filter_userId=' + obj.userId + '&encoder=' + obj.encoder + '&username=' + obj.userId + '&a=1' + '&branch=' + branch : src.indexOf('?') != -1 && src.indexOf('&') != -1 ? src + '&filter_userId=' + obj.userId + '&encoder=' + obj.encoder + '&username=' + obj.userId + '&a=1' + '&branch=' + branch : src.indexOf('?') == -1 && src.indexOf('&') == -1 ? src + '?filter_userId=' + obj.userId + '&encoder=' + obj.encoder + '&username=' + obj.userId + '&firstFlag' : src.indexOf('?') != -1 && src.indexOf('&') == -1 && src.split('?')[1].length > 0 ? src + '&filter_userId=' + obj.userId + '&encoder=' + obj.encoder + '&username=' + obj.userId + '&a=1' : src + 'filter_userId=' + obj.userId + '&encoder=' + obj.encoder + '&username=' + obj.userId + '&a=1' + '&branch=' + branch;
             }ysp.appMain.showLoading();elem.ownerDocument.defaultView.open(src);
           }
-        };xhr.open('POST', 'http://192.168.220.82:8080/pttlCrm/homepage/getUserIdAndEncoder', false);xhr.send();
+        };xhr.open('POST', 'http://pttlcrm.com/pttlCrm/homepage/getUserIdAndEncoder', false);xhr.send();
       } // if (data.eventType == 'isNeedLoad') {
       //   if (top.EAPI.isAndroid()) {
       //     top.yspCheckIn.isRefresh(false);

@@ -39,11 +39,11 @@
     },
     doAction_uiControl176_cUGqtJ: function (data, elem) {
       if (data.eventType == "click") {
-        debugger;var A = elem.querySelector("tbody").querySelectorAll('a')[0].href;ysp.customHelper.informationEntry.enterName = ysp.customHelper.informationEntry.enterSplit(A, 'userId=');var backfillData = JSON.stringify({ 'user': ysp.customHelper.logLoginName, 'stock': ysp.customHelper.informationEntry.enterName });if (top.EAPI.isIOS()) {
+        var A = elem.querySelector("tbody").querySelectorAll('a')[0].href;ysp.customHelper.informationEntry.enterName = ysp.customHelper.informationEntry.enterSplit(A, 'userId=');var backfillData = JSON.stringify({ 'user': ysp.customHelper.logLoginName, 'stock': ysp.customHelper.informationEntry.enterName });if (top.EAPI.isIOS()) {
           //top.EAPI.postMessageToNative('getData', backfillData);
           ysp.customHelper.informationEntry.getData.call(top, ysp.customHelper.logLoginName, ysp.customHelper.informationEntry.enterName); //以上为信息录入存储部分
         } else {
-          ysp.customHelper.informationEntry.getData.call(top, ysp.customHelper.logLoginName, ysp.customHelper.informationEntry.enterName);
+          ysp.customHelper.informationEntry.getData.call(ysp.customHelper.informationEntry, ysp.customHelper.logLoginName, ysp.customHelper.informationEntry.enterName);
         }ysp.customHelper.pageId();var i = data.dataCustom.i;var val = data.dataCustom.val;elem.querySelector("tbody").querySelectorAll("tr")[i].querySelectorAll("td")[val].querySelector("a").click();
       }if (data.eventType == "showLoading") {
         // setTimeout(function () {
@@ -137,7 +137,7 @@
     doAction_uiControl1_k6Pm8Q: function (data, elem) {
       if (data.eventType === 'click') {
         var operation = data.dataCustom.value;if (operation == '门店信息录入') {
-          var url = "http://192.168.220.82:8080/pttlCrm/res/page/psi/storeInfocollection.html"; //更换返回方式,跳回至信息录入
+          var url = "http://pttlcrm.com/pttlCrm/res/page/psi/storeInfocollection.html"; //更换返回方式,跳回至信息录入
           ysp.customHelper.BackReload(url, 'HESInformationFill');
         }
       }

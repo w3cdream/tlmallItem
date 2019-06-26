@@ -4,14 +4,14 @@
             "name": "登录页",
             "app_id": "login",
             "icon": "local/img/OA.png",
-            "url": "http://192.168.220.82:8080/pttlCrm/login"
+            "url": "http://pttlcrm.com/pttlCrm/login"
         }
     ],
     "environments": [
         {
             "name": "环境1",
             "domains": [
-                "http://192.168.220.82:8080",
+                "http://pttlcrm.com",
                 "",
                 ""
             ]
