@@ -1,0 +1,308 @@
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
+}
+
+*:not(input,textarea) { 
+    -webkit-touch-callout: none; 
+    -webkit-user-select: none; 
+}
+
+html,
+body {
+    height: 100%;
+    background: #0c0c0c;
+}
+
+ul,
+ol,
+li {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+header.am-header {
+    background-color: #0c0c0c;
+    /* margin-bottom: 38px; */
+}
+
+header.am-header .am-header-title {
+    /* color: rgb(145, 103, 79); */
+    color: #fff;
+    font-size: 18px;
+}
+
+header .am-header-right a {
+    font-size: 14px;
+}
+
+nav {
+    background: #fff;
+}
+
+nav li {
+    padding: 15px 0;
+    text-align: center;
+}
+
+nav li.am-active {
+    border-bottom: 2px solid #f0462a;
+}
+
+nav li.am-active a {
+    width: 100%;
+}
+
+nav li.am-active a,
+nav li.am-active a:link,
+nav li.am-active a:visited,
+nav li.am-active a:hover,
+nav li.am-active a:active {
+    color: #f0462a;
+}
+
+nav li a {
+    display: block;
+    height: 15px;
+    line-height: 15px;
+    border-right: 1px solid #ebebeb;
+}
+
+nav li a,
+nav li a:link,
+nav li a:visited,
+nav li a:hover,
+nav li a:active {
+    color: #999999;
+}
+
+nav li:last-child a {
+    border-right: none;
+}
+
+header.am-header {
+    height: 30px;
+    line-height: 30px;
+}
+
+header.am-header .am-header-left {
+    left: 0;
+}
+
+header.am-header .am-header-left img {
+    height: 30px;
+}
+.abnormalInfoList{
+    padding:15px;
+    margin-top: 20px;
+    color: #b7b7b7;
+    font-size: 14px;
+    padding-bottom: 250px;
+}
+
+.abnormalInfoList li{
+    height: 35px;
+    line-height: 35px;
+    display: flex;
+    position: relative;
+}
+.abnormalInfoList li span:first-child{
+    width: 30%;
+    text-align: left;
+}
+.abnormalInfoList li span:last-child{
+    width: 70%;
+    text-align: right;
+}
+.abnormalInfoList>li>span input{
+    text-align: right;
+    color: #b7b7b7;
+    width: 100%;
+    background: transparent;
+    border:none;
+    outline: none;
+    
+}
+.abnormalInfoList li.type,.abnormalInfoList li.date,.abnormalInfoList li.checkbox,.abnormalInfoList li.reason{
+    border-top:1px solid  #555555;
+    height: 60px;
+    line-height:60px;
+}
+.abnormalInfoList li.type{
+    margin-top: 5px;
+}
+.abnormalInfoList li.checkbox span label{
+    font-size: 18px;
+    color: #fff;
+    font-weight: normal;
+}
+.abnormalInfoList li.checkbox span{
+    width: 50%;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    line-height: 60px;
+}
+.abnormalInfoList li.checkbox span input.checked{
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    background: url(../img/checked.png) no-repeat center center;
+    background-size: contain;
+    margin-left: 15px;
+    margin-top: 0px;
+    border-radius: 3px;
+    outline: none;
+   
+}
+.abnormalInfoList li.checkbox span input.unchecked{
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    background: url(../img/unchecked.png) no-repeat center center;
+    background-size: contain;
+    margin-left: 15px;
+    margin-top: 0px;
+    border-radius: 3px;
+    outline: none;
+}
+.abnormalInfoList li.reason{
+  display: flex;
+  flex-flow: column nowrap;
+}
+.abnormalInfoList li.reason span{
+    width: 100%;    
+}
+.abnormalInfoList li.reason textarea{
+    width: 100%;
+    height: 130px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    background-color: #201e22;
+    resize: none;
+    padding: 15px;
+    line-height:20px;
+}
+button.submit{
+    box-sizing: border-box;
+    position: fixed;
+    bottom: 0px;
+    appearance: none;
+    width: 100%;
+    height:50px;
+    line-height: 40px;
+    background: rgb(145, 103, 79);
+    color: #fff;
+    border: none;
+    outline: none;
+    font-size: 15px;
+}
+.abnormalInfoList li.date{
+    background: url(../img/calendar.png) no-repeat right center;
+    background-size: 6%;
+}
+.abnormalInfoList li.type select{
+    width: 100%;
+    appearance: none;
+    background: transparent;
+    outline: none;
+    height: 60px;
+    border: none;
+    background: url(../img/select.png) no-repeat right center;
+    background-size: 7%;
+    text-align: right;
+}
+.abnormalInfoList li.type select option{
+    text-align: right;
+}
+.abnormalInfoList li span:first-child i{
+    position: absolute;
+    left: 0px;
+    bottom: 7px;
+    font-size: 12px;
+    color: #fa111c;
+    font-style: normal;
+    background: url(../img/warning.png) no-repeat left center;
+    background-size: 12px;
+    height: 12px;
+    line-height: 12px;
+    padding-left: 15px;
+    display: none;
+}
+/*.modal{
+    position: fixed;
+   
+    top: 0px;
+    bottom:0px;
+    left:0px;
+    height: 0px;
+    background-color: rgba(0, 0, 0,0.7);
+    z-index: 300;
+  }*/
+  .success_tips{
+    width: 110px;
+    height: 110px;
+    /* padding-top: 60px; */
+    background: url(../img/submit.png) #fff no-repeat center center;
+    background-size: contain;
+    margin-top: 50%;
+    margin-left: 50%;
+    transform: translate3d(-50%,-50%,0);
+    border-radius: 3px;
+    text-align: center;
+    /* line-height: 12px; */
+    color: #0c0c0c;
+  }
+  .modal{
+  position: fixed;
+   width: 100%;
+    height: 100vh!important;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    background: rgba(0,0,0,0.7);
+    z-index: 200; 
+    display: none;
+}
+.container{
+   width: 60vw;
+   /*background: #fff;*/
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate3d(-50%,-50%,0);
+   background: url(../img/success.png) #fff no-repeat center 15%;
+   background-size: 18%;
+}
+.container.fail{
+    background: url(../img/fail.png) #fff no-repeat center 15%;
+   background-size: 18%;
+}
+.container>.title{
+   height: 30px;
+   line-height: 30px;
+   color: #98664C;
+   text-align: center;
+   font-size: 14px;
+   margin-top: 70px;
+}
+.container>.content{
+   font-size: 12px;
+   text-align: center;
+   padding-bottom: 15px;
+   color: #A8A8A8;
+}
+.container>.close{
+  height: 40px;
+   line-height: 40px;
+  border-top: 1px solid #EFEFEF;
+  color: #A8A8A8;
+  font-size: 14px;
+  text-align: center;
+}

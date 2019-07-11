@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="assets/css/amazeui.min.css" />
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/laydate/theme/default/laydate.css">
+</head>
+<body>
+    <header data-am-widget="header" class="am-header am-header-default">
+        <div class="header-nav">
+            <div class="am-header-left am-header-nav ToBack" onclick="toBack()">
+                <img src="assets/img/back.png" alt="">
+            </div>
+            <h1 class="am-header-title">
+                帮助中心
+            </h1>
+        </div>
+    </header>
+    <div class='help-container'>
+        <ul>
+            <li >
+                <div class='help-title' onclick='toogole()'>1 . 打卡时间</div>
+                <div class='help-content'>答 : 一天24小时内的打卡都属于当天的打卡记录</div>
+            </li>
+            <li>
+                <div class='help-title' onclick='toogole()'>2 . 考勤匹配取卡规则</div>
+                <div class='help-content'>答 : （1）当天无出差打卡：默认取当天最后一张打卡发起流程并匹配考勤；
+                        （2）当天有出差打卡：取当天最后一张出差卡发起出差申请流程并匹配考勤。
+                </div>
+            </li>
+            <li>
+                <div class='help-title' onclick='toogole()'>3 . 公出/出差流程发起时间</div>
+                <div class='help-content'>答 : 每天上午10点IHR系统自动发起前一天的申请流程（待审批状态），员工可在IHR系统【公出/出差申请】页面进行查看。</div>
+            </li>
+            <li>
+                <div class='help-title' onclick='toogole()'>4 . 当天忘记打卡的处理方式</div>
+                <div class='help-content'>答 : 忘记打出勤卡/公出卡/出差卡的，一律通过IHR系统提交【全天忘打卡申请】处理。（注意：每考勤周期只有两次机会，公出/出差忘打卡也只能补为出勤，出差将无法报销；如员工忘记打卡超过两次，可用年假、事假等补考勤，否则系统记为旷工。）</div>
+            </li>
+        </ul>
+    </div>
+    <script>
+        function toogole(){
+            if(!event.target.classList.contains('help-title-unactive')){
+                event.target.classList.add('help-title-unactive');
+                event.target.parentNode.querySelector('.help-content').style.display ='block'
+            }else{
+                event.target.classList.remove('help-title-unactive');
+                event.target.parentNode.querySelector('.help-content').style.display ='none'
+            }
+        }
+        function toBack(){
+            history.back();
+        }
+    </script>
+</body>
+</html>

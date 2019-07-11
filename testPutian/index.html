@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>首页 | 打卡</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <link rel="stylesheet" href="assets/css/amazeui.min.css" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+
+<body>
+    <!-- 头部 -->
+    <header data-am-widget="header" class="am-header am-header-default">
+        <div class="header-nav">
+            <div class="am-header-left am-header-nav callBack">
+                <img src="assets/img/back.png" alt="">
+            </div>
+            <h1 class="am-header-title">
+                移动打卡
+            </h1>
+            <div class="dateTime" onclick="pubchTaken()">
+                <img src="assets/img/search.png" alt=""  />
+            </div>
+            <div class="help" onclick="help()">
+                    <img src="assets/img/bangzhu.png" alt=""  />
+            </div>
+        </div>
+    </header>
+    <!-- 页身 -->
+    <section>
+        <!-- 当前时间 -->
+        <div class="card index-punch">
+            <span class="date"></span>
+            <span class="day"> </span>
+            <time class="time">00:00:00</time>
+            <span class="punch-time"></span>
+            <span class="user"></span>
+        </div>
+        <!-- 当前位置 -->
+        <div class="locationGroup">
+            <div class="makecardType">
+                <div class="typeSelect">
+                    <div class="typeSelected" style="display:none"></div>
+                    <div class="typeBoard">
+                        <div>出勤</div>
+                        <div>出差</div>
+                        <div>公出</div>
+                    </div>
+                </div>
+            </div>
+            <div class="attendance">
+                <div class="selectLocation">
+                    <div class="addressHead">
+                        <img src="assets/img/yourPIN.png" alt="">
+                        <div class="showAddress storeLocation">
+                        </div>
+                    </div>
+                    <div class="addressList" style="display:none;">
+                    </div>
+                </div>
+            </div>
+            <div class="onBusiness" style="display:none">
+                <div class="selectLocation">
+                    <div class="onBusinessAdrHead">
+                        <img src="assets/img/yourPIN.png" alt="">
+                        <div class="showAddress">
+                        </div>
+                    </div>
+                    <div class="addressList" style="display:none;">
+                        <div class="other">其他</div>
+                    </div>
+                    <div class="otherBoard" style="display:none;">
+                        <div class="otherTitle">其他</div>
+                        <textarea placeholder="请填写出差理由"></textarea>
+                        <div class="otherTip">出差理由不能为空</div>
+                    </div>
+                </div>
+            </div>
+            <div class="officialBusiness" style="display:none">
+                <div class="selectLocation">
+                    <div class="addressHead">
+                        <textarea placeholder="请输入公出事由"></textarea>
+                        <div class="businessTip">公出事由不能为空</div>
+                    </div>
+                </div>
+            </div>
+            <div class="currentLocation">
+                <img src="assets/img/myPIN.png" alt="">
+                <div class="currentAdrHead">
+                </div>
+                <img src="assets/img/refreshBtn.png" alt="" class="refreshBtn">
+            </div>
+        </div>
+
+        <!-- 签到/签退按钮 -->
+        <div class="index-sign" style="display: none">
+            <button type="button" class="sign-btn unclockable">
+                <i class="clock-icon"></i>
+                <span></span>
+            </button>
+            <p class="tips"></p>
+        </div>
+        <!-- 签到/签退弹出框 -->
+        <div class="am-modal am-modal-no-btn punch-modal" tabindex="-1">
+            <div class="am-modal-dialog">
+                <div class="am-modal-bd">
+                    <!-- 打卡异常提示信息 -->
+                    <div class="punch-warning-desc">
+                        <div class="modal-punch-info">
+                            <p class="modal-punch-tips">提示</p>
+                            <div class="modal-punch-abnormal">
+                                <span class="modal-punch-state"></span>
+                                <span class="modal-punch-time"></span>
+                            </div>
+                            <p class="modal-punch-reason-tips">打卡成功，是否解释说明？</p>
+                            <p class="modal-punch-place"></p>
+                        </div>
+                        <div class="modal-punch-operate">
+                            <ul class="am-avg-sm-2 confirm-box">
+                                <li><a href="javascript: void(0)" class="modal-punch-confirm">确认打卡</a></li>
+                                <li><a href="javascript: void(0)" class="modal-punch-cancel">取消</a></li>
+                            </ul>
+                            <ul class="am-avg-sm-2 reason-box">
+                                <li><a href="javascript: void(0)" class="modal-punch-reason">解释说明</a></li>
+                                <li><a href="javascript: void(0)" class="modal-punch-cancel">取消</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- 打开成功弹出内容-->
+                    <div class="punch-success">
+                        <i class="am-icon-check"></i>
+                        <p>已打卡</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 当前位置 -->
+        <div class="index-map">
+            <div class="map" id="allmap">
+            </div>
+        </div>
+    </section>
+    <!-- 已打卡 -->
+    <div class="modal" style="display:none">
+        <div class="success_tips">
+            <!-- 已打卡 -->
+        </div>
+    </div>
+    <!-- 提交弹框 -->
+    <div class="reasonModal" style='display:none'>
+        <div class="reason_area">
+            <div class="reason_top">
+                <div class='reason_tip'>
+                    <span>提示：</span>
+                    <span>定位位置与实际位置范围超过500m</span>
+                </div>
+                <textarea placeholder="说明解释"></textarea>
+                <div class="tip">说明解释不能为空</div>
+            </div>
+            <div class="btns">
+                <span class="submitBtn">提交</span>
+                <span class="backBtn">返回</span>
+            </div>
+        </div>
+    </div>
+    <!-- 已提交 -->
+    <div class="submitModal" style="display:none">
+        <div class="submit_tips">
+            <!-- 已提交 -->
+        </div>
+    </div>
+    <!-- 页脚 -->
+    <footer>
+        打卡
+    </footer>
+</body>
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/amazeui.min.js"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=uh8tgPO8erhTzPKiD9aFES2z9DRlCxgD"></script>
+<script src="assets/js/client.js"></script>
+<script src="assets/js/getLunarDay.js"></script>
+<script src="assets/js/ptIndex.js"></script>
+<script src="assets/js/MD5.js"></script>
+</html>
